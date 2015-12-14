@@ -10,6 +10,9 @@
 		A66D25841C1F2B8F00C55681 /* IOGrowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D25821C1F2B8F00C55681 /* IOGrowVC.swift */; };
 		A66D25851C1F2B8F00C55681 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D25831C1F2B8F00C55681 /* SettingsViewController.swift */; };
 		A66D25871C1F2BBC00C55681 /* Main1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D25861C1F2BBC00C55681 /* Main1ViewController.swift */; };
+		A66D258A1C1F2CB400C55681 /* IOGrowHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D25891C1F2CB400C55681 /* IOGrowHeader.swift */; };
+		A66D258C1C1F2CC900C55681 /* IOGrowHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66D258B1C1F2CC900C55681 /* IOGrowHeader.xib */; };
+		A66D258E1C1F2E7900C55681 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A66D258D1C1F2E7900C55681 /* Podfile */; };
 		D5070B991B9DEDBE000CDE1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5070B981B9DEDBE000CDE1A /* AppDelegate.swift */; };
 		D5070BA01B9DEDBE000CDE1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5070B9F1B9DEDBE000CDE1A /* Images.xcassets */; };
 		D5070BA31B9DEDBE000CDE1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5070BA11B9DEDBE000CDE1A /* LaunchScreen.xib */; };
@@ -26,6 +29,9 @@
 		A66D25821C1F2B8F00C55681 /* IOGrowVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOGrowVC.swift; sourceTree = "<group>"; };
 		A66D25831C1F2B8F00C55681 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A66D25861C1F2BBC00C55681 /* Main1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main1ViewController.swift; sourceTree = "<group>"; };
+		A66D25891C1F2CB400C55681 /* IOGrowHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOGrowHeader.swift; sourceTree = "<group>"; };
+		A66D258B1C1F2CC900C55681 /* IOGrowHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IOGrowHeader.xib; sourceTree = "<group>"; };
+		A66D258D1C1F2E7900C55681 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		D5070B931B9DEDBE000CDE1A /* MHImageTabBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHImageTabBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5070B971B9DEDBE000CDE1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5070B981B9DEDBE000CDE1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +64,8 @@
 			children = (
 				A66D25861C1F2BBC00C55681 /* Main1ViewController.swift */,
 				A66D25821C1F2B8F00C55681 /* IOGrowVC.swift */,
+				A66D25891C1F2CB400C55681 /* IOGrowHeader.swift */,
+				A66D258B1C1F2CC900C55681 /* IOGrowHeader.xib */,
 				A66D25831C1F2B8F00C55681 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
@@ -77,6 +85,7 @@
 		D5070B8A1B9DEDBE000CDE1A = {
 			isa = PBXGroup;
 			children = (
+				A66D258D1C1F2E7900C55681 /* Podfile */,
 				D5070B951B9DEDBE000CDE1A /* MHImageTabBar */,
 				D5070BAB1B9DEDBF000CDE1A /* MHImageTabBarTests */,
 				D5070B941B9DEDBE000CDE1A /* Products */,
@@ -192,10 +201,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5070BBB1B9DF0CA000CDE1A /* Tabbar.storyboard in Resources */,
+				A66D258C1C1F2CC900C55681 /* IOGrowHeader.xib in Resources */,
 				D5070BBD1B9DFC4E000CDE1A /* Main1.storyboard in Resources */,
 				D5070BA31B9DEDBE000CDE1A /* LaunchScreen.xib in Resources */,
 				D5070BC21B9DFCBA000CDE1A /* Main3.storyboard in Resources */,
 				D5070BC31B9DFCBA000CDE1A /* Main4.storyboard in Resources */,
+				A66D258E1C1F2E7900C55681 /* Podfile in Resources */,
 				D5070BC11B9DFCBA000CDE1A /* Main2.storyboard in Resources */,
 				D5070BA01B9DEDBE000CDE1A /* Images.xcassets in Resources */,
 			);
@@ -213,6 +224,7 @@
 				D5070B991B9DEDBE000CDE1A /* AppDelegate.swift in Sources */,
 				D5070BC51B9E0100000CDE1A /* Constants.swift in Sources */,
 				A66D25871C1F2BBC00C55681 /* Main1ViewController.swift in Sources */,
+				A66D258A1C1F2CB400C55681 /* IOGrowHeader.swift in Sources */,
 				A66D25851C1F2B8F00C55681 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
