@@ -47,22 +47,22 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = .DecimalStyle
         var suffix = ""
-        if let unit = Constants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(Constants.General.UnitOfMeasure.key())) {
+        if let unit = ComplexConstants.UnitsOfMeasure(rawValue: userDefaults.integerForKey(ComplexConstants.General.UnitOfMeasure.key())) {
             unitOfMesureLabel.text = unit.nameForUnitOfMeasure()
             suffix = unit.suffixForUnitOfMeasure()
         }
 
         _ = uomLabels.map({$0.text = suffix})
-        largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Prayr.Big.key()))
-        smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Prayr.Small.key()))
-        dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(Constants.Prayr.Goal.key()))
+        largePortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(ComplexConstants.Prayr.Big.key()))
+        smallPortionText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(ComplexConstants.Prayr.Small.key()))
+        dailyGoalText.text = numberFormatter.stringFromNumber(userDefaults.doubleForKey(ComplexConstants.Prayr.Goal.key()))
 
-        healthSwitch.on = userDefaults.boolForKey(Constants.Health.On.key())
+        healthSwitch.on = userDefaults.boolForKey(ComplexConstants.Health.On.key())
 
-        notificationSwitch.on = userDefaults.boolForKey(Constants.Notification.On.key())
-        notificationFromLabel.text = "\(userDefaults.integerForKey(Constants.Notification.From.key())):00"
-        notificationToLabel.text = "\(userDefaults.integerForKey(Constants.Notification.To.key())):00"
-        notificationIntervalLabel.text = "\(userDefaults.integerForKey(Constants.Notification.Interval.key())) " +  NSLocalizedString("hours", comment: "")
+        notificationSwitch.on = userDefaults.boolForKey(ComplexConstants.Notification.On.key())
+        notificationFromLabel.text = "\(userDefaults.integerForKey(ComplexConstants.Notification.From.key())):00"
+        notificationToLabel.text = "\(userDefaults.integerForKey(ComplexConstants.Notification.To.key())):00"
+        notificationIntervalLabel.text = "\(userDefaults.integerForKey(ComplexConstants.Notification.Interval.key())) " +  NSLocalizedString("hours", comment: "")
     }
 
     func updateNotificationPreferences() {
@@ -79,13 +79,13 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         var actionSheet: AHKActionSheet?
         if (indexPath.section == 0 && indexPath.row == 0) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("unit of measure title", comment: ""))
-            actionSheet?.addButtonWithTitle(Constants.UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default) { _ in
-                self.userDefaults.setInteger(Constants.UnitsOfMeasure.Liters.rawValue, forKey: Constants.General.UnitOfMeasure.key())
+            actionSheet?.addButtonWithTitle(ComplexConstants.UnitsOfMeasure.Liters.nameForUnitOfMeasure(), type: .Default) { _ in
+                self.userDefaults.setInteger(ComplexConstants.UnitsOfMeasure.Liters.rawValue, forKey: ComplexConstants.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
             }
-            actionSheet?.addButtonWithTitle(Constants.UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default) { _ in
-                self.userDefaults.setInteger(Constants.UnitsOfMeasure.Ounces.rawValue, forKey: Constants.General.UnitOfMeasure.key())
+            actionSheet?.addButtonWithTitle(ComplexConstants.UnitsOfMeasure.Ounces.nameForUnitOfMeasure(), type: .Default) { _ in
+                self.userDefaults.setInteger(ComplexConstants.UnitsOfMeasure.Ounces.rawValue, forKey: ComplexConstants.General.UnitOfMeasure.key())
                 self.userDefaults.synchronize()
                 self.updateUI()
             }
@@ -94,16 +94,16 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             actionSheet = AHKActionSheet(title: NSLocalizedString("from:", comment: ""))
             for index in 5...22 {
                 actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
-                    self.updateNotificationSetting(Constants.Notification.From.key(), value: index)
+                    self.updateNotificationSetting(ComplexConstants.Notification.From.key(), value: index)
                 }
             }
         }
         if (indexPath.section == 2 && indexPath.row == 2) {
             actionSheet = AHKActionSheet(title: NSLocalizedString("to:", comment: ""))
-            let upper = self.userDefaults.integerForKey(Constants.Notification.From.key()) + 1
+            let upper = self.userDefaults.integerForKey(ComplexConstants.Notification.From.key()) + 1
             for index in upper...24 {
                 actionSheet?.addButtonWithTitle("\(index):00", type: .Default) { _ in
-                    self.updateNotificationSetting(Constants.Notification.To.key(), value: index)
+                    self.updateNotificationSetting(ComplexConstants.Notification.To.key(), value: index)
                 }
             }
         }
@@ -112,7 +112,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
             for index in 1...8 {
                 let hour = index > 1 ? NSLocalizedString("hours", comment: "") : NSLocalizedString("hour", comment: "")
                 actionSheet?.addButtonWithTitle("\(index) \(hour)", type: .Default) { _ in
-                    self.updateNotificationSetting(Constants.Notification.Interval.key(), value: index)
+                    self.updateNotificationSetting(ComplexConstants.Notification.Interval.key(), value: index)
                 }
             }
         }
@@ -132,17 +132,10 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         return 44
     }
 
-    @IBAction func healthAction(sender: UISwitch) {
-        userDefaults.setBool(sender.on, forKey: Constants.Health.On.key())
-        userDefaults.synchronize()
-        self.tableView.reloadData()
-        if sender.on {
-            HealthKitHelper.sharedHelper.askPermission()
-        }
-    }
+
 
     @IBAction func reminderAction(sender: UISwitch) {
-        userDefaults.setBool(sender.on, forKey: Constants.Notification.On.key())
+        userDefaults.setBool(sender.on, forKey: ComplexConstants.Notification.On.key())
         userDefaults.synchronize()
         self.tableView.reloadData()
         updateNotificationPreferences()
@@ -158,7 +151,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         } else if (section == 1) {
             return 3
         } else if (section == 2) {
-            if NSUserDefaults.groupUserDefaults().boolForKey(Constants.Notification.On.key()) {
+            if NSUserDefaults.groupUserDefaults().boolForKey(ComplexConstants.Notification.On.key()) {
                 return 4
             } else {
                 return 1
@@ -170,13 +163,13 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
 
     func textFieldDidEndEditing(textField: UITextField) {
         if (textField == smallPortionText) {
-            storeText(smallPortionText, toKey: Constants.Prayr.Small.key())
+            storeText(smallPortionText, toKey: ComplexConstants.Prayr.Small.key())
         }
         if (textField == largePortionText) {
-            storeText(largePortionText, toKey: Constants.Prayr.Big.key())
+            storeText(largePortionText, toKey: ComplexConstants.Prayr.Big.key())
         }
         if (textField == dailyGoalText) {
-            storeText(dailyGoalText, toKey: Constants.Prayr.Goal.key())
+            storeText(dailyGoalText, toKey: ComplexConstants.Prayr.Goal.key())
         }
     }
 
@@ -189,7 +182,7 @@ class SettingsViewController: UITableViewController, UIAlertViewDelegate, UIText
         userDefaults.synchronize()
 
         // Update the settings on the watch
-        WatchConnectivityHelper().sendWatchData()
+        //WatchConnectivityHelper().sendWatchData()
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

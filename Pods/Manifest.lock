@@ -1,0 +1,16 @@
+PODS:
+  - AHKActionSheet (0.5.3)
+  - AMPopTip (0.10.1)
+  - IOStickyHeader (0.2.4)
+
+DEPENDENCIES:
+  - AHKActionSheet (~> 0.5)
+  - AMPopTip (~> 0.7)
+  - IOStickyHeader
+
+SPEC CHECKSUMS:
+  AHKActionSheet: 0b7d3bc6467dd934441fd82beb3911fc1f7bdfd2
+  AMPopTip: b0b5d009f3ed47b10f118438a18e0ab5cd03c40d
+  IOStickyHeader: 128bab4da4ee6e32766ee85503b0a58b48f111b4
+
+COCOAPODS: 0.39.0

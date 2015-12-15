@@ -1,12 +1,16 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
+xcodeproj '/Volumes/WINHD/Repos/MHImageTabBar/MHImageTabBar.xcodeproj'
+
 def common_pods
   pod 'IOStickyHeader'
+  pod 'AHKActionSheet', '~> 0.5'
+  pod 'AMPopTip', '~> 0.7'
 end
 
 
-target 'MHImageTabBar'
+target 'MHImageTabBar' do
   common_pods
 end
 

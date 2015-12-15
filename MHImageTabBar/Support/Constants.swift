@@ -1,4 +1,12 @@
+//
+//  Constants.swift
+//  MHImageTabBar
+//
+//  Created by teklabsco on 12/15/15.
+//  Copyright © 2015 MHO. All rights reserved.
+//
 
+import Foundation
 import UIKit
 
 struct MHImageTabBarConstants {
