@@ -28,4 +28,7 @@ public class Settings {
             ComplexConstants.Prayr.Small.key(): userDefaults.doubleForKey(ComplexConstants.Prayr.Small.key()),
             ComplexConstants.Prayr.Big.key(): userDefaults.doubleForKey(ComplexConstants.Prayr.Big.key())]
     }
+    
+    
+
 }

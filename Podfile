@@ -7,6 +7,15 @@ def common_pods
   pod 'IOStickyHeader'
   pod 'AHKActionSheet', '~> 0.5'
   pod 'AMPopTip', '~> 0.7'
+  pod 'MBProgressHUD'
+  pod 'FormatterKit'
+  pod 'Parse'
+  pod 'Bolts'
+  pod 'ParseUI'
+  pod 'UIImageAFAdditions', :git => 'https://github.com/teklabs/UIImageAFAdditions.git'
+  pod 'ParseFacebookUtilsV4'
+  pod 'ParseTwitterUtils'
+  #pod 'FBSDKCoreKit'
 end
 
 

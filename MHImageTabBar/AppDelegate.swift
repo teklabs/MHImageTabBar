@@ -1,5 +1,9 @@
 
 import UIKit
+import Parse
+import ParseFacebookUtilsV4
+import ParseTwitterUtils
+import MBProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -9,8 +13,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        Parse.setApplicationId("oUuHAfy2K9KHPOj12TumNGe7tx2GSbyhCXjHCz8o", clientKey: "fJ2fqkZ1lsRqXfRiS2z6EM2A7egK7xQQirnSx77J")
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions);
+        PFTwitterUtils.initializeWithConsumerKey("3Q9hMEKqqSg4ie2pibZ2sVJuv", consumerSecret: "IEZ9wv2d1EpXNGFKGp7sAGdxRtyqtPwygyciFZwTHTGhPp4FMj")
+
         
         let userDefaults = NSUserDefaults.groupUserDefaults()
+        
+        
+        let defaultACL: PFACL = PFACL()
+        // Enable public read access by default, with any newly created PFObjects belonging to the current user
+        //defaultACL.setPublicReadAccess(true)
+        PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser: true)
         
         return true
     }

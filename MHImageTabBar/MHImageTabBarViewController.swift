@@ -21,8 +21,7 @@ class MHImageTabBarViewController: UIViewController {
     var selectedViewControllerIndex: Int = 0 {
         didSet {
             imageViews[oldValue].tintColor = nil
-            imageViews[selectedViewControllerIndex].tintColor = MHImageTabBarConstants.tabBarSelectedItemColor
-            
+            imageViews[selectedViewControllerIndex].tintColor = .tabBarSelectedItemColor()
             switchToViewController(viewControllers[selectedViewControllerIndex])
         }
     }
@@ -59,10 +58,14 @@ class MHImageTabBarViewController: UIViewController {
         setupConstraints()
         addGestureRecognizers()
         
-        tabBar.tintColor = MHImageTabBarConstants.tabBarUnselectedItemColor
-        tabBar.backgroundColor = MHImageTabBarConstants.tabBarBackgroundColor
-        tabBarSeparator.backgroundColor = MHImageTabBarConstants.tabBarSeparatorColor
+        //tabBar.tintColor = MHImageTabBarConstants.tabBarUnselectedItemColor
+        tabBar.tintColor = .tabBarUnselectedItemColor()
+        //tabBar.backgroundColor = MHImageTabBarConstants.tabBarBackgroundColor
+        tabBar.backgroundColor = .tabBarBackgroundColor()
+        //tabBarSeparator.backgroundColor = MHImageTabBarConstants.tabBarSeparatorColor
+        tabBarSeparator.backgroundColor = .tabBarSeparatorColor()
         tabBar.tintAdjustmentMode = .Normal
+        
         
         tabBarHiddenConstant = tabBarHeightConstraint.constant
     }
