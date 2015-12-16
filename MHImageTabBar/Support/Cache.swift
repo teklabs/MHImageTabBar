@@ -20,11 +20,11 @@ final class Cache {
 
     func setAttributesForPhoto(photo: PFObject, likers: [PFUser], commenters: [PFUser], likedByCurrentUser: Bool) {
         let attributes = [
-            kPAPPhotoAttributesIsLikedByCurrentUserKey: likedByCurrentUser,
-            kPAPPhotoAttributesLikeCountKey: likers.count,
-            kPAPPhotoAttributesLikersKey: likers,
-            kPAPPhotoAttributesCommentCountKey: commenters.count,
-            kPAPPhotoAttributesCommentersKey: commenters
+            kPhotoAttributesIsLikedByCurrentUserKey: likedByCurrentUser,
+            kPhotoAttributesLikeCountKey: likers.count,
+            kPhotoAttributesLikersKey: likers,
+            kPhotoAttributesCommentCountKey: commenters.count,
+            kPhotoAttributesCommentersKey: commenters
         ]
         setAttributes(attributes as! [String : AnyObject], forPhoto: photo)
     }
@@ -37,7 +37,7 @@ final class Cache {
     func likeCountForPhoto(photo: PFObject) -> Int {
         let attributes: [NSObject:AnyObject]? = self.attributesForPhoto(photo)
         if attributes != nil {
-            return attributes![kPAPPhotoAttributesLikeCountKey] as! Int
+            return attributes![kPhotoAttributesLikeCountKey] as! Int
         }
 
         return 0
@@ -46,7 +46,7 @@ final class Cache {
     func commentCountForPhoto(photo: PFObject) -> Int {
         let attributes = attributesForPhoto(photo)
         if attributes != nil {
-            return attributes![kPAPPhotoAttributesCommentCountKey] as! Int
+            return attributes![kPhotoAttributesCommentCountKey] as! Int
         }
         
         return 0
@@ -55,7 +55,7 @@ final class Cache {
     func likersForPhoto(photo: PFObject) -> [PFUser] {
         let attributes = attributesForPhoto(photo)
         if attributes != nil {
-            return attributes![kPAPPhotoAttributesLikersKey] as! [PFUser]
+            return attributes![kPhotoAttributesLikersKey] as! [PFUser]
         }
         
         return [PFUser]()
@@ -64,7 +64,7 @@ final class Cache {
     func commentersForPhoto(photo: PFObject) -> [PFUser] {
         let attributes = attributesForPhoto(photo)
         if attributes != nil {
-            return attributes![kPAPPhotoAttributesCommentersKey] as! [PFUser]
+            return attributes![kPhotoAttributesCommentersKey] as! [PFUser]
         }
         
         return [PFUser]()
@@ -72,14 +72,14 @@ final class Cache {
 
     func setPhotoIsLikedByCurrentUser(photo: PFObject, liked: Bool) {
         var attributes = attributesForPhoto(photo)
-        attributes![kPAPPhotoAttributesIsLikedByCurrentUserKey] = liked
+        attributes![kPhotoAttributesIsLikedByCurrentUserKey] = liked
         setAttributes(attributes!, forPhoto: photo)
     }
 
     func isPhotoLikedByCurrentUser(photo: PFObject) -> Bool {
         let attributes = attributesForPhoto(photo)
         if attributes != nil {
-            return attributes![kPAPPhotoAttributesIsLikedByCurrentUserKey] as! Bool
+            return attributes![kPhotoAttributesIsLikedByCurrentUserKey] as! Bool
         }
         
         return false
@@ -88,7 +88,7 @@ final class Cache {
     func incrementLikerCountForPhoto(photo: PFObject) {
         let likerCount = likeCountForPhoto(photo) + 1
         var attributes = attributesForPhoto(photo)
-        attributes![kPAPPhotoAttributesLikeCountKey] = likerCount
+        attributes![kPhotoAttributesLikeCountKey] = likerCount
         setAttributes(attributes!, forPhoto: photo)
     }
 
@@ -98,14 +98,14 @@ final class Cache {
             return
         }
         var attributes = attributesForPhoto(photo)
-        attributes![kPAPPhotoAttributesLikeCountKey] = likerCount
+        attributes![kPhotoAttributesLikeCountKey] = likerCount
         setAttributes(attributes!, forPhoto: photo)
     }
 
     func incrementCommentCountForPhoto(photo: PFObject) {
         let commentCount = commentCountForPhoto(photo) + 1
         var attributes = attributesForPhoto(photo)
-        attributes![kPAPPhotoAttributesCommentCountKey] = commentCount
+        attributes![kPhotoAttributesCommentCountKey] = commentCount
         setAttributes(attributes!, forPhoto: photo)
     }
 
@@ -115,14 +115,14 @@ final class Cache {
             return
         }
         var attributes = attributesForPhoto(photo)
-        attributes![kPAPPhotoAttributesCommentCountKey] = commentCount
+        attributes![kPhotoAttributesCommentCountKey] = commentCount
         setAttributes(attributes!, forPhoto: photo)
     }
 
     func setAttributesForUser(user: PFUser, photoCount count: Int, followedByCurrentUser following: Bool) {
         let attributes = [
-            kPAPUserAttributesPhotoCountKey: count,
-            kPAPUserAttributesIsFollowedByCurrentUserKey: following
+            kUserAttributesPhotoCountKey: count,
+            kUserAttributesIsFollowedByCurrentUserKey: following
         ]
 
         setAttributes(attributes as! [String : AnyObject], forUser: user)
@@ -135,7 +135,7 @@ final class Cache {
 
     func photoCountForUser(user: PFUser) -> Int {
         if let attributes = attributesForUser(user) {
-            if let photoCount = attributes[kPAPUserAttributesPhotoCountKey] as? Int {
+            if let photoCount = attributes[kUserAttributesPhotoCountKey] as? Int {
                 return photoCount
             }
         }
@@ -145,7 +145,7 @@ final class Cache {
 
     func followStatusForUser(user: PFUser) -> Bool {
         if let attributes = attributesForUser(user) {
-            if let followStatus = attributes[kPAPUserAttributesIsFollowedByCurrentUserKey] as? Bool {
+            if let followStatus = attributes[kUserAttributesIsFollowedByCurrentUserKey] as? Bool {
                 return followStatus
             }
         }
@@ -155,27 +155,27 @@ final class Cache {
 
     func setPhotoCount(count: Int,  user: PFUser) {
         if var attributes = attributesForUser(user) {
-            attributes[kPAPUserAttributesPhotoCountKey] = count
+            attributes[kUserAttributesPhotoCountKey] = count
             setAttributes(attributes, forUser: user)
         }
     }
 
     func setFollowStatus(following: Bool, user: PFUser) {
         if var attributes = attributesForUser(user) {
-            attributes[kPAPUserAttributesIsFollowedByCurrentUserKey] = following
+            attributes[kUserAttributesIsFollowedByCurrentUserKey] = following
             setAttributes(attributes, forUser: user)
         }
     }
 
     func setFacebookFriends(friends: NSArray) {
-        let key: String = kPAPUserDefaultsCacheFacebookFriendsKey
+        let key: String = kUserDefaultsCacheFacebookFriendsKey
         self.cache.setObject(friends, forKey: key)
         NSUserDefaults.standardUserDefaults().setObject(friends, forKey: key)
         NSUserDefaults.standardUserDefaults().synchronize()
     }
 
     func facebookFriends() -> [PFUser] {
-        let key = kPAPUserDefaultsCacheFacebookFriendsKey
+        let key = kUserDefaultsCacheFacebookFriendsKey
         if cache.objectForKey(key) != nil {
             return cache.objectForKey(key) as! [PFUser]
         }

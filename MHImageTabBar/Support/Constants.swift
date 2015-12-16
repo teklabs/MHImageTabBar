@@ -37,89 +37,89 @@ enum TabBarControllerViewControllerIndex: Int {
 // Chris    558159381
 // Matt     723748661
 
-let kPAPParseEmployeeAccounts = ["400680", "403902", "1225726", "4806789", "6409809", "12800553", "121800083", "500011038", "558159381", "723748661"]
+let kEmployeeAccounts = ["400680", "403902", "1225726", "4806789", "6409809", "12800553", "121800083", "500011038", "558159381", "723748661"]
 
-let kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey = "com.parse.Anypic.userDefaults.activityFeedViewController.lastRefresh"
-let kPAPUserDefaultsCacheFacebookFriendsKey = "com.parse.Anypic.userDefaults.cache.facebookFriends"
+let kUserDefaultsActivityFeedViewControllerLastRefreshKey = "com.parse.Anypic.userDefaults.activityFeedViewController.lastRefresh"
+let kUserDefaultsCacheFacebookFriendsKey = "com.parse.Anypic.userDefaults.cache.facebookFriends"
 
 // MARK:- Launch URLs
 
-let kPAPLaunchURLHostTakePicture = "camera"
+let kLaunchURLHostTakePicture = "camera"
 
 // MARK:- NSNotification
 
-let PAPAppDelegateApplicationDidReceiveRemoteNotification           = "com.parse.Anypic.appDelegate.applicationDidReceiveRemoteNotification"
+let AppDelegateApplicationDidReceiveRemoteNotification           = "com.parse.Anypic.appDelegate.applicationDidReceiveRemoteNotification"
 let UtilityUserFollowingChangedNotification                      = "com.parse.Anypic.utility.userFollowingChanged"
 let UtilityUserLikedUnlikedPhotoCallbackFinishedNotification     = "com.parse.Anypic.utility.userLikedUnlikedPhotoCallbackFinished"
 let UtilityDidFinishProcessingProfilePictureNotification         = "com.parse.Anypic.utility.didFinishProcessingProfilePictureNotification"
 let TabBarControllerDidFinishEditingPhotoNotification            = "com.parse.Anypic.tabBarController.didFinishEditingPhoto"
-let PAPTabBarControllerDidFinishImageFileUploadNotification         = "com.parse.Anypic.tabBarController.didFinishImageFileUploadNotification"
-let PAPPhotoDetailsViewControllerUserDeletedPhotoNotification       = "com.parse.Anypic.photoDetailsViewController.userDeletedPhoto"
-let PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification  = "com.parse.Anypic.photoDetailsViewController.userLikedUnlikedPhotoInDetailsViewNotification"
-let PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification   = "com.parse.Anypic.photoDetailsViewController.userCommentedOnPhotoInDetailsViewNotification"
+let TabBarControllerDidFinishImageFileUploadNotification         = "com.parse.Anypic.tabBarController.didFinishImageFileUploadNotification"
+let PhotoDetailsViewControllerUserDeletedPhotoNotification       = "com.parse.Anypic.photoDetailsViewController.userDeletedPhoto"
+let PhotoDetailsViewControllerUserLikedUnlikedPhotoNotification  = "com.parse.Anypic.photoDetailsViewController.userLikedUnlikedPhotoInDetailsViewNotification"
+let PhotoDetailsViewControllerUserCommentedOnPhotoNotification   = "com.parse.Anypic.photoDetailsViewController.userCommentedOnPhotoInDetailsViewNotification"
 
 // MARK:- User Info Keys
-let PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey = "liked"
-let kPAPEditPhotoViewControllerUserInfoCommentKey = "comment"
+let PhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey = "liked"
+let kEditPhotoViewControllerUserInfoCommentKey = "comment"
 
 // MARK:- Installation Class
 
 // Field keys
-let kPAPInstallationUserKey = "user"
+let kInstallationUserKey = "user"
 
 // MARK:- Activity Class
 // Class key
-let kPAPActivityClassKey = "Activity"
+let kActivityClassKey = "Activity"
 
 // Field keys
-let kPAPActivityTypeKey        = "type"
-let kPAPActivityFromUserKey    = "fromUser"
-let kPAPActivityToUserKey      = "toUser"
-let kPAPActivityContentKey     = "content"
-let kPAPActivityPhotoKey       = "photo"
+let kActivityTypeKey        = "type"
+let kActivityFromUserKey    = "fromUser"
+let kActivityToUserKey      = "toUser"
+let kActivityContentKey     = "content"
+let kActivityPhotoKey       = "photo"
 
 // Type values
-let kPAPActivityTypeLike       = "like"
-let kPAPActivityTypeFollow     = "follow"
-let kPAPActivityTypeComment    = "comment"
-let kPAPActivityTypeJoined     = "joined"
+let kActivityTypeLike       = "like"
+let kActivityTypeFollow     = "follow"
+let kActivityTypeComment    = "comment"
+let kActivityTypeJoined     = "joined"
 
 // MARK:- User Class
 // Field keys
-let kPAPUserDisplayNameKey                          = "displayName"
-let kPAPUserFacebookIDKey                           = "facebookId"
-let kPAPUserPhotoIDKey                              = "photoId"
-let kPAPUserProfilePicSmallKey                      = "profilePictureSmall"
-let kPAPUserProfilePicMediumKey                     = "profilePictureMedium"
-let kPAPUserFacebookFriendsKey                      = "facebookFriends"
-let kPAPUserAlreadyAutoFollowedFacebookFriendsKey   = "userAlreadyAutoFollowedFacebookFriends"
-let kPAPUserEmailKey                                = "email"
-let kPAPUserAutoFollowKey                           = "autoFollow"
+let kUserDisplayNameKey                          = "displayName"
+let kUserFacebookIDKey                           = "facebookId"
+let kUserPhotoIDKey                              = "photoId"
+let kUserProfilePicSmallKey                      = "profilePictureSmall"
+let kUserProfilePicMediumKey                     = "profilePictureMedium"
+let kUserFacebookFriendsKey                      = "facebookFriends"
+let kUserAlreadyAutoFollowedFacebookFriendsKey   = "userAlreadyAutoFollowedFacebookFriends"
+let kUserEmailKey                                = "email"
+let kUserAutoFollowKey                           = "autoFollow"
 
 // MARK:- Photo Class
 
 // Class key
-let kPAPPhotoClassKey = "Photo"
+let kPhotoClassKey = "Photo"
 
 // Field keys
-let kPAPPhotoPictureKey         = "image"
-let kPAPPhotoThumbnailKey       = "thumbnail"
-let kPAPPhotoUserKey            = "user"
-let kPAPPhotoOpenGraphIDKey     = "fbOpenGraphID"
-let kPAPPrayerUserKey           = "prayer"
+let kPhotoPictureKey         = "image"
+let kPhotoThumbnailKey       = "thumbnail"
+let kPhotoUserKey            = "user"
+let kPhotoOpenGraphIDKey     = "fbOpenGraphID"
+let kPrayerUserKey           = "prayer"
 
 // MARK:- Cached Photo Attributes
 // keys
-let kPAPPhotoAttributesIsLikedByCurrentUserKey = "isLikedByCurrentUser";
-let kPAPPhotoAttributesLikeCountKey            = "likeCount"
-let kPAPPhotoAttributesLikersKey               = "likers"
-let kPAPPhotoAttributesCommentCountKey         = "commentCount"
-let kPAPPhotoAttributesCommentersKey           = "commenters"
+let kPhotoAttributesIsLikedByCurrentUserKey = "isLikedByCurrentUser";
+let kPhotoAttributesLikeCountKey            = "likeCount"
+let kPhotoAttributesLikersKey               = "likers"
+let kPhotoAttributesCommentCountKey         = "commentCount"
+let kPhotoAttributesCommentersKey           = "commenters"
 
 // MARK:- Cached User Attributes
 // keys
-let kPAPUserAttributesPhotoCountKey                 = "photoCount"
-let kPAPUserAttributesIsFollowedByCurrentUserKey    = "isFollowedByCurrentUser"
+let kUserAttributesPhotoCountKey                 = "photoCount"
+let kUserAttributesIsFollowedByCurrentUserKey    = "isFollowedByCurrentUser"
 
 // MARK:- Push Notification Payload Keys
 
@@ -128,14 +128,14 @@ let kAPNSBadgeKey = "badge"
 let kAPNSSoundKey = "sound"
 
 // the following keys are intentionally kept short, APNS has a maximum payload limit
-let kPAPPushPayloadPayloadTypeKey          = "p"
-let kPAPPushPayloadPayloadTypeActivityKey  = "a"
+let kPushPayloadPayloadTypeKey          = "p"
+let kPushPayloadPayloadTypeActivityKey  = "a"
 
-let kPAPPushPayloadActivityTypeKey     = "t"
-let kPAPPushPayloadActivityLikeKey     = "l"
-let kPAPPushPayloadActivityCommentKey  = "c"
-let kPAPPushPayloadActivityFollowKey   = "f"
+let kPushPayloadActivityTypeKey     = "t"
+let kPushPayloadActivityLikeKey     = "l"
+let kPushPayloadActivityCommentKey  = "c"
+let kPushPayloadActivityFollowKey   = "f"
 
-let kPAPPushPayloadFromUserObjectIdKey = "fu"
-let kPAPPushPayloadToUserObjectIdKey   = "tu"
-let kPAPPushPayloadPhotoObjectIdKey = "pid"
+let kPushPayloadFromUserObjectIdKey = "fu"
+let kPushPayloadToUserObjectIdKey   = "tu"
+let kPushPayloadPhotoObjectIdKey = "pid"

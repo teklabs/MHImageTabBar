@@ -3,22 +3,22 @@ import FormatterKit
 import Parse
 import ParseUI
 
-struct PAPPhotoHeaderButtons : OptionSetType {
+struct PhotoHeaderButtons : OptionSetType {
     let rawValue : Int
     init(rawValue: Int) { self.rawValue = rawValue }
 
-    static let None = PAPPhotoHeaderButtons(rawValue: 1 << 0)
-    static let Like = PAPPhotoHeaderButtons(rawValue: 1 << 1)
-    static let Comment = PAPPhotoHeaderButtons(rawValue: 1 << 2)
-    static let User = PAPPhotoHeaderButtons(rawValue: 1 << 3)
+    static let None = PhotoHeaderButtons(rawValue: 1 << 0)
+    static let Like = PhotoHeaderButtons(rawValue: 1 << 1)
+    static let Comment = PhotoHeaderButtons(rawValue: 1 << 2)
+    static let User = PhotoHeaderButtons(rawValue: 1 << 3)
     
-    static let Default: PAPPhotoHeaderButtons = [Like, Comment, User]
+    static let Default: PhotoHeaderButtons = [Like, Comment, User]
 }
 
 class PhotoHeaderView: PFTableViewCell {
 
     /// The bitmask which specifies the enabled interaction elements in the view
-    var buttons: PAPPhotoHeaderButtons = .None
+    var buttons: PhotoHeaderButtons = .None
 
     /*! @name Accessing Interaction Elements */
 
@@ -28,7 +28,7 @@ class PhotoHeaderView: PFTableViewCell {
     /// The Comment On Photo button
     var commentButton: UIButton?
     
-    var delegate: PAPPhotoHeaderViewDelegate?
+    var delegate: PhotoHeaderViewDelegate?
     
     var containerView: UIView?
     var avatarImageView: ProfileImageView?
@@ -38,7 +38,7 @@ class PhotoHeaderView: PFTableViewCell {
     
     // MARK:- Initialization
 
-    init(frame: CGRect, buttons otherButtons: PAPPhotoHeaderButtons) {
+    init(frame: CGRect, buttons otherButtons: PhotoHeaderButtons) {
         super.init(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         self.frame = frame
         
@@ -60,7 +60,7 @@ class PhotoHeaderView: PFTableViewCell {
         self.avatarImageView!.profileButton!.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
         self.containerView!.addSubview(self.avatarImageView!)
         
-        if self.buttons.contains(PAPPhotoHeaderButtons.Comment) {
+        if self.buttons.contains(PhotoHeaderButtons.Comment) {
             // comments button
             commentButton = UIButton(type: UIButtonType.Custom)
             containerView!.addSubview(self.commentButton!)
@@ -76,7 +76,7 @@ class PhotoHeaderView: PFTableViewCell {
             self.commentButton!.selected = false
         }
         
-        if self.buttons.contains(PAPPhotoHeaderButtons.Like) {
+        if self.buttons.contains(PhotoHeaderButtons.Like) {
             // like button
             likeButton = UIButton(type: UIButtonType.Custom)
             containerView!.addSubview(self.likeButton!)
@@ -96,7 +96,7 @@ class PhotoHeaderView: PFTableViewCell {
             self.likeButton!.selected = false
         }
         
-        if self.buttons.contains(PAPPhotoHeaderButtons.User) {
+        if self.buttons.contains(PhotoHeaderButtons.User) {
             // This is the user's display name, on a button so that we can tap on it
             self.userButton = UIButton(type: UIButtonType.Custom)
             containerView!.addSubview(self.userButton!)
@@ -121,15 +121,15 @@ class PhotoHeaderView: PFTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK:- PAPPhotoHeaderView
+    // MARK:- PhotoHeaderView
 
     /// The photo associated with this view
     var photo: PFObject? {
         didSet {
             // user's avatar
-            let user: PFUser? = photo!.objectForKey(kPAPPhotoUserKey) as? PFUser
+            let user: PFUser? = photo!.objectForKey(kPhotoUserKey) as? PFUser
             if Utility.userHasProfilePictures(user!) {
-                let profilePictureSmall: PFFile = user!.objectForKey(kPAPUserProfilePicSmallKey) as! PFFile
+                let profilePictureSmall: PFFile = user!.objectForKey(kUserProfilePicSmallKey) as! PFFile
                 self.avatarImageView!.setFile(profilePictureSmall)
             } else {
                 self.avatarImageView!.setImage(Utility.defaultProfilePicture()!)
@@ -139,21 +139,21 @@ class PhotoHeaderView: PFTableViewCell {
             self.avatarImageView!.layer.cornerRadius = 17.5
             self.avatarImageView!.layer.masksToBounds = true
 
-            let authorName: String = user!.objectForKey(kPAPUserDisplayNameKey) as! String
+            let authorName: String = user!.objectForKey(kUserDisplayNameKey) as! String
             self.userButton!.setTitle(authorName, forState: UIControlState.Normal)
             
             var constrainWidth: CGFloat = containerView!.bounds.size.width
 
-            if self.buttons.contains(PAPPhotoHeaderButtons.User) {
+            if self.buttons.contains(PhotoHeaderButtons.User) {
                 self.userButton!.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
             }
             
-            if self.buttons.contains(PAPPhotoHeaderButtons.Comment) {
+            if self.buttons.contains(PhotoHeaderButtons.Comment) {
                 constrainWidth = self.commentButton!.frame.origin.x
                 self.commentButton!.addTarget(self, action: Selector("didTapCommentOnPhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
             }
             
-            if self.buttons.contains(PAPPhotoHeaderButtons.Like) {
+            if self.buttons.contains(PhotoHeaderButtons.Like) {
                 constrainWidth = self.likeButton!.frame.origin.x
                 self.likeButton!.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
             }
@@ -201,16 +201,16 @@ class PhotoHeaderView: PFTableViewCell {
     
     // MARK:- ()
 
-    static func validateButtons(buttons: PAPPhotoHeaderButtons) {
-        if buttons == PAPPhotoHeaderButtons.None {
-// FIXME            [NSException raise:NSInvalidArgumentException format:@"Buttons must be set before initializing PAPPhotoHeaderView."];
-            fatalError("Buttons must be set before initializing PAPPhotoHeaderView.")
+    static func validateButtons(buttons: PhotoHeaderButtons) {
+        if buttons == PhotoHeaderButtons.None {
+// FIXME            [NSException raise:NSInvalidArgumentException format:@"Buttons must be set before initializing PhotoHeaderView."];
+            fatalError("Buttons must be set before initializing PhotoHeaderView.")
         }
     }
     
     func didTapUserButtonAction(sender: UIButton) {
         if delegate != nil && delegate!.respondsToSelector(Selector("photoHeaderView:didTapUserButton:user:")) {
-            delegate!.photoHeaderView!(self, didTapUserButton: sender, user: self.photo![kPAPPhotoUserKey] as! PFUser)
+            delegate!.photoHeaderView!(self, didTapUserButton: sender, user: self.photo![kPhotoUserKey] as! PFUser)
         }
     }
     
@@ -233,7 +233,7 @@ class PhotoHeaderView: PFTableViewCell {
  The protocol defines methods a delegate of a PhotoHeaderView should implement.
  All methods of the protocol are optional.
  */
-@objc protocol PAPPhotoHeaderViewDelegate: NSObjectProtocol {
+@objc protocol PhotoHeaderViewDelegate: NSObjectProtocol {
     /*!
      Sent to the delegate when the user button is tapped
      @param user the PFUser associated with this button

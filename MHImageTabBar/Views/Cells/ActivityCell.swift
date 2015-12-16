@@ -95,25 +95,25 @@ class ActivityCell: BaseTextCell {
     /*!Setter for the activity associated with this cell */
     var activity: PFObject? {
         didSet {
-            if (activity!.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeFollow || (activity!.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeJoined {
+            if (activity!.objectForKey(kActivityTypeKey) as! String) == kActivityTypeFollow || (activity!.objectForKey(kActivityTypeKey) as! String) == kActivityTypeJoined {
                 self.setActivityImageFile(nil)
             } else {
-                self.setActivityImageFile((activity!.objectForKey(kPAPActivityPhotoKey) as! PFObject).objectForKey(kPAPPhotoThumbnailKey) as? PFFile)
+                self.setActivityImageFile((activity!.objectForKey(kActivityPhotoKey) as! PFObject).objectForKey(kPhotoThumbnailKey) as? PFFile)
             }
             
-            let activityString: String = ActivityFeedViewController.stringForActivityType(activity!.objectForKey(kPAPActivityTypeKey) as! String)!
-            self.user = activity!.objectForKey(kPAPActivityFromUserKey) as? PFUser
+            let activityString: String = ActivityFeedViewController.stringForActivityType(activity!.objectForKey(kActivityTypeKey) as! String)!
+            self.user = activity!.objectForKey(kActivityFromUserKey) as? PFUser
             
             // Set name button properties and avatar image
             if Utility.userHasProfilePictures(self.user!) {
-                self.avatarImageView!.setFile(self.user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
+                self.avatarImageView!.setFile(self.user!.objectForKey(kUserProfilePicSmallKey) as? PFFile)
             } else {
                 self.avatarImageView!.setImage(Utility.defaultProfilePicture()!)
             }
             
             var nameString: String = NSLocalizedString("Someone", comment: "Text when the user's name is unknown")
-            if self.user?.objectForKey(kPAPUserDisplayNameKey)?.length > 0 {
-                nameString = self.user!.objectForKey(kPAPUserDisplayNameKey) as! String
+            if self.user?.objectForKey(kUserDisplayNameKey)?.length > 0 {
+                nameString = self.user!.objectForKey(kUserDisplayNameKey) as! String
             }
             
             self.nameButton!.setTitle(nameString, forState: UIControlState.Normal)

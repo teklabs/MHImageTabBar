@@ -33,7 +33,7 @@ class BaseTextCell: PFTableViewCell {
     /*! 
      Unfortunately, objective-c does not allow you to redefine the type of a property,
      so we cannot set the type of the delegate here. Doing so would mean that the subclass
-     of would not be able to define new delegate methods (which we do in PAPActivityCell).
+     of would not be able to define new delegate methods (which we do in ActivityCell).
      */
 //    var delegate: BaseTextCellDelegate? {
 //        get {
@@ -247,13 +247,13 @@ class BaseTextCell: PFTableViewCell {
         didSet {
             // Set name button properties and avatar image
             if Utility.userHasProfilePictures(self.user!) {
-                self.avatarImageView!.setFile(self.user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
+                self.avatarImageView!.setFile(self.user!.objectForKey(kUserProfilePicSmallKey) as? PFFile)
             } else {
                 self.avatarImageView!.setImage(Utility.defaultProfilePicture()!)
             }
 
-            self.nameButton!.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Normal)
-            self.nameButton!.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState:UIControlState.Highlighted)
+            self.nameButton!.setTitle(self.user!.objectForKey(kUserDisplayNameKey) as? String, forState: UIControlState.Normal)
+            self.nameButton!.setTitle(self.user!.objectForKey(kUserDisplayNameKey) as? String, forState:UIControlState.Highlighted)
             
             // If user is set after the contentText, we reset the content to include padding
             if self.contentLabel!.text != nil {

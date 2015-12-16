@@ -10,13 +10,13 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
     // MARK:- Initialization
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: PAPAppDelegateApplicationDidReceiveRemoteNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AppDelegateApplicationDidReceiveRemoteNotification, object: nil)
     }
     
     override init(style: UITableViewStyle, className: String?) {
         super.init(style: style, className: className)
         // The className to query on
-        self.parseClassName = kPAPActivityClassKey
+        self.parseClassName = kActivityClassKey
         
         // Whether the built-in pagination is enabled
         self.paginationEnabled = true
@@ -50,10 +50,10 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "LogoNavigationBar.png"))
         
         // Add Settings button
-        //self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: 
+        //self.navigationItem.rightBarButtonItem = SettingsButtonItem(target: self, action: 
         //Selector("settingsButtonAction:"))
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidReceiveRemoteNotification:"), name: PAPAppDelegateApplicationDidReceiveRemoteNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("applicationDidReceiveRemoteNotification:"), name: AppDelegateApplicationDidReceiveRemoteNotification, object: nil)
         
         self.blankTimelineView = UIView(frame: self.tableView.bounds)
         
@@ -63,7 +63,7 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         button.addTarget(self, action: Selector("inviteFriendsButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
         self.blankTimelineView!.addSubview(button)
         
-        lastRefresh = NSUserDefaults.standardUserDefaults().objectForKey(kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey) as? NSDate
+        lastRefresh = NSUserDefaults.standardUserDefaults().objectForKey(kUserDefaultsActivityFeedViewControllerLastRefreshKey) as? NSDate
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -80,12 +80,12 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row < self.objects!.count {
             let object: PFObject = self.objects![indexPath.row] as! PFObject
-            let activityString: String? = ActivityFeedViewController.stringForActivityType(object.objectForKey(kPAPActivityTypeKey) as! String)
+            let activityString: String? = ActivityFeedViewController.stringForActivityType(object.objectForKey(kActivityTypeKey) as! String)
             
-            let user: PFUser? = object.objectForKey(kPAPActivityFromUserKey) as? PFUser
+            let user: PFUser? = object.objectForKey(kActivityFromUserKey) as? PFUser
             var nameString = NSLocalizedString("Someone", comment: "Someone")
-            if (user?.objectForKey(kPAPUserDisplayNameKey) as? String)?.characters.count > 0 {
-                nameString = user!.objectForKey(kPAPUserDisplayNameKey) as! String
+            if (user?.objectForKey(kUserDisplayNameKey) as? String)?.characters.count > 0 {
+                nameString = user!.objectForKey(kUserDisplayNameKey) as! String
             }
             
             return ActivityCell.heightForCellWithName(nameString, contentString:activityString!)
@@ -98,9 +98,9 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.row < self.objects!.count {
             let activity: PFObject = self.objects![indexPath.row] as! PFObject
-            if activity.objectForKey(kPAPActivityFromUserKey) != nil {
-                let detailViewController = AccountViewController(user: activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-                print("Presenting account view controller with user: \(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)")
+            if activity.objectForKey(kActivityFromUserKey) != nil {
+                let detailViewController = AccountViewController(user: activity.objectForKey(kActivityFromUserKey) as! PFUser)
+                print("Presenting account view controller with user: \(activity.objectForKey(kActivityFromUserKey) as! PFUser)")
                 self.navigationController!.pushViewController(detailViewController, animated: true)
             }
         } else if self.paginationEnabled {
@@ -119,11 +119,11 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         }
         
         let query = PFQuery(className: self.parseClassName!)
-        query.whereKey(kPAPActivityToUserKey, equalTo: PFUser.currentUser()!)
-        query.whereKey(kPAPActivityFromUserKey, notEqualTo: PFUser.currentUser()!)
-        query.whereKeyExists(kPAPActivityFromUserKey)
-        query.includeKey(kPAPActivityFromUserKey)
-        query.includeKey(kPAPActivityPhotoKey)
+        query.whereKey(kActivityToUserKey, equalTo: PFUser.currentUser()!)
+        query.whereKey(kActivityFromUserKey, notEqualTo: PFUser.currentUser()!)
+        query.whereKeyExists(kActivityFromUserKey)
+        query.includeKey(kActivityFromUserKey)
+        query.includeKey(kActivityPhotoKey)
         query.orderByDescending("createdAt")
         
         query.cachePolicy = PFCachePolicy.NetworkOnly
@@ -143,7 +143,7 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         super.objectsDidLoad(error)
         
         lastRefresh = NSDate()
-        NSUserDefaults.standardUserDefaults().setObject(lastRefresh, forKey: kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey)
+        NSUserDefaults.standardUserDefaults().setObject(lastRefresh, forKey: kUserDefaultsActivityFeedViewControllerLastRefreshKey)
         NSUserDefaults.standardUserDefaults().synchronize()
         
         MBProgressHUD.hideHUDForView(self.view, animated: true)
@@ -166,7 +166,7 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
             
             var unreadCount: Int = 0
             for activity in self.objects as! [PFObject] {
-                if lastRefresh!.compare(activity.createdAt!) == NSComparisonResult.OrderedAscending && (activity.objectForKey(kPAPActivityTypeKey) as! String) != kPAPActivityTypeJoined {
+                if lastRefresh!.compare(activity.createdAt!) == NSComparisonResult.OrderedAscending && (activity.objectForKey(kActivityTypeKey) as! String) != kActivityTypeJoined {
                     unreadCount++
                 }
             }
@@ -215,14 +215,14 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         return cell!
     }
     
-    // MARK:- PAPActivityCellDelegate Methods
+    // MARK:- ActivityCellDelegate Methods
     
     func cell(cellView: ActivityCell, didTapActivityButton activity: PFObject) {
         // Get image associated with the activity
-        let photo: PFObject = activity.objectForKey(kPAPActivityPhotoKey) as! PFObject
+        let photo: PFObject = activity.objectForKey(kActivityPhotoKey) as! PFObject
         
         // Push single photo view controller
-        let photoViewController = ActivityDetailsViewController(photo: photo)
+        let photoViewController = PhotoDetailsViewController(photo: photo)
         self.navigationController!.pushViewController(photoViewController, animated: true)
     }
     
@@ -237,13 +237,13 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
     // MARK:- ActivityFeedViewController
     
     class func stringForActivityType(activityType: String) -> String? {
-        if activityType == kPAPActivityTypeLike {
+        if activityType == kActivityTypeLike {
             return NSLocalizedString("liked your photo", comment: "")
-        } else if activityType == kPAPActivityTypeFollow {
+        } else if activityType == kActivityTypeFollow {
             return NSLocalizedString("started following you", comment: "")
-        } else if activityType == kPAPActivityTypeComment {
+        } else if activityType == kActivityTypeComment {
             return NSLocalizedString("commented on your photo", comment: "")
-        } else if activityType == kPAPActivityTypeJoined {
+        } else if activityType == kActivityTypeJoined {
             return NSLocalizedString("joined Anypic", comment: "")
         } else {
             return nil

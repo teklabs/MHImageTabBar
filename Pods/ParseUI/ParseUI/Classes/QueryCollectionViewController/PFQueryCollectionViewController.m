@@ -80,10 +80,6 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
     return self;
 }
 
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
-    return[self initWithCollectionViewLayout:layout className:nil];
-}
-
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout className:(NSString *)className {
     self = [super initWithCollectionViewLayout:layout];
     if (!self) return nil;
@@ -330,7 +326,7 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
     _currentNextPageView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                               withReuseIdentifier:PFQueryCollectionViewNextPageReusableViewIdentifier
                                                                      forIndexPath:[self _indexPathForPaginationReusableView]];
-    _currentNextPageView.textLabel.text = PFLocalizedString(@"Load more...", @"Load more...");
+    _currentNextPageView.textLabel.text = NSLocalizedString(@"Load more...", @"Load more...");
     [_currentNextPageView addTarget:self action:@selector(loadNextPage) forControlEvents:UIControlEventTouchUpInside];
     _currentNextPageView.animating = self.loading;
     return _currentNextPageView;
@@ -355,7 +351,12 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
-    return [self collectionViewReusableViewForNextPageAction:collectionView];
+    if ([self _shouldShowPaginationView] &&
+        [kind isEqualToString:UICollectionElementKindSectionFooter] &&
+        [indexPath isEqual:[self _indexPathForPaginationReusableView]]) {
+        return [self collectionViewReusableViewForNextPageAction:collectionView];
+    }
+    return nil;
 }
 
 #pragma mark -
@@ -389,27 +390,25 @@ static NSString *const PFQueryCollectionViewNextPageReusableViewIdentifier = @"n
     [self loadObjects];
 
     NSString *errorMessage = [NSString stringWithFormat:@"%@: \"%@\"",
-                              PFLocalizedString(@"Error occurred during deletion", @"Error occurred during deletion"),
+                              NSLocalizedString(@"Error occurred during deletion", @"Error occurred during deletion"),
                               error.localizedDescription];
 
     if ([UIAlertController class]) {
-        UIAlertController *errorController = [UIAlertController alertControllerWithTitle:PFLocalizedString(@"Error", @"Error")
+        UIAlertController *errorController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", @"Error")
                                                                                  message:errorMessage
                                                                           preferredStyle:UIAlertControllerStyleAlert];
 
-        [errorController addAction:[UIAlertAction actionWithTitle:PFLocalizedString(@"OK", @"OK")
+        [errorController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                             style:UIAlertActionStyleCancel
                                                           handler:nil]];
 
         [self presentViewController:errorController animated:YES completion:nil];
     } else {
-        // Cast to `id` is required for building succesfully for app extensions,
-        // this code actually never runs in App Extensions, since they are iOS 8.0+, so we are good with just a hack
-        UIAlertView *alertView = [(id)[UIAlertView alloc] initWithTitle:PFLocalizedString(@"Error", @"Error")
-                                                                message:errorMessage
-                                                               delegate:nil
-                                                      cancelButtonTitle:PFLocalizedString(@"OK", @"OK")
-                                                      otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                            message:errorMessage
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                                  otherButtonTitles:nil];
 
         [alertView show];
     }

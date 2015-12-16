@@ -2,7 +2,8 @@ import Foundation
 import CoreGraphics
 import UIImageAFAdditions
 import Parse
-import ParseFacebookUtilsV4
+import ParseFacebookUtils
+//import ParseFacebookUtilsV4
 import FBSDKCoreKit
 
 class Utility {
@@ -11,30 +12,30 @@ class Utility {
     
     // MARK Like Photos
 
-    class func requestPrayerInBackground(prayer: PFObject, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
-        let queryExistingLikes = PFQuery(className: kPAPActivityClassKey)
-        queryExistingLikes.whereKey(kPAPActivityPhotoKey, equalTo: prayer)
-        queryExistingLikes.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeLike)
-        queryExistingLikes.whereKey(kPAPActivityFromUserKey, equalTo: PFUser.currentUser()!)
+    class func likePhotoInBackground(photo: PFObject, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
+        let queryExistingLikes = PFQuery(className: kActivityClassKey)
+        queryExistingLikes.whereKey(kActivityPhotoKey, equalTo: photo)
+        queryExistingLikes.whereKey(kActivityTypeKey, equalTo: kActivityTypeLike)
+        queryExistingLikes.whereKey(kActivityFromUserKey, equalTo: PFUser.currentUser()!)
         queryExistingLikes.cachePolicy = PFCachePolicy.NetworkOnly
         queryExistingLikes.findObjectsInBackgroundWithBlock { (activities, error) in
             if error == nil {
-                for activity in activities! as [PFObject] {
+                for activity in activities! as! [PFObject] {
 // FIXME: To be removed! this is synchronous!                    activity.delete()
                     activity.deleteInBackground()
                 }
             }
             
             // proceed to creating new like
-            let likeActivity = PFObject(className: kPAPActivityClassKey)
-            likeActivity.setObject(kPAPActivityTypeLike, forKey: kPAPActivityTypeKey)
-            likeActivity.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
-            likeActivity.setObject(prayer.objectForKey(kPAPPhotoUserKey)!, forKey: kPAPActivityToUserKey)
-            likeActivity.setObject(prayer, forKey: kPAPActivityPhotoKey)
+            let likeActivity = PFObject(className: kActivityClassKey)
+            likeActivity.setObject(kActivityTypeLike, forKey: kActivityTypeKey)
+            likeActivity.setObject(PFUser.currentUser()!, forKey: kActivityFromUserKey)
+            likeActivity.setObject(photo.objectForKey(kPhotoUserKey)!, forKey: kActivityToUserKey)
+            likeActivity.setObject(photo, forKey: kActivityPhotoKey)
             
             let likeACL = PFACL(user: PFUser.currentUser()!)
             likeACL.setPublicReadAccess(true)
-            likeACL.setWriteAccess(true, forUser: prayer.objectForKey(kPAPPrayerUserKey) as! PFUser)
+            likeACL.setWriteAccess(true, forUser: photo.objectForKey(kPhotoUserKey) as! PFUser)
             likeActivity.ACL = likeACL
 
             likeActivity.saveInBackgroundWithBlock { (succeeded, error) in
@@ -43,7 +44,7 @@ class Utility {
                 }
 
                 // refresh cache
-                let query = Utility.queryForActivitiesOnPhoto(prayer, cachePolicy: PFCachePolicy.NetworkOnly)
+                let query = Utility.queryForActivitiesOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
                 query.findObjectsInBackgroundWithBlock { (objects, error) in
                     if error == nil {
                         var likers = [PFUser]()
@@ -51,24 +52,24 @@ class Utility {
                         
                         var isLikedByCurrentUser = false
                         
-                        for activity in objects! as [PFObject] {
-                            if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-                                likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-                            } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-                                commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+                        for activity in objects! as! [PFObject] {
+                            if (activity.objectForKey(kActivityTypeKey) as! String) == kActivityTypeLike && activity.objectForKey(kActivityFromUserKey) != nil {
+                                likers.append(activity.objectForKey(kActivityFromUserKey) as! PFUser)
+                            } else if (activity.objectForKey(kActivityTypeKey) as! String) == kActivityTypeComment && activity.objectForKey(kActivityFromUserKey) != nil {
+                                commenters.append(activity.objectForKey(kActivityFromUserKey) as! PFUser)
                             }
                             
-                            if (activity.objectForKey(kPAPActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
-                                if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
+                            if (activity.objectForKey(kActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
+                                if (activity.objectForKey(kActivityTypeKey) as! String) == kActivityTypeLike {
                                     isLikedByCurrentUser = true
                                 }
                             }
                         }
                         
-                        Cache.sharedCache.setAttributesForPhoto(prayer, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
+                        Cache.sharedCache.setAttributesForPhoto(photo, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
                     }
 
-                    NSNotificationCenter.defaultCenter().postNotificationName(UtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: prayer, userInfo: [PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey: succeeded.boolValue])
+                    NSNotificationCenter.defaultCenter().postNotificationName(UtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: photo, userInfo: [PhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey: succeeded.boolValue])
                 }
 
             }
@@ -76,14 +77,14 @@ class Utility {
     }
 
     class func unlikePhotoInBackground(photo: PFObject, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
-        let queryExistingLikes = PFQuery(className: kPAPActivityClassKey)
-        queryExistingLikes.whereKey(kPAPActivityPhotoKey, equalTo: photo)
-        queryExistingLikes.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeLike)
-        queryExistingLikes.whereKey(kPAPActivityFromUserKey, equalTo: PFUser.currentUser()!)
+        let queryExistingLikes = PFQuery(className: kActivityClassKey)
+        queryExistingLikes.whereKey(kActivityPhotoKey, equalTo: photo)
+        queryExistingLikes.whereKey(kActivityTypeKey, equalTo: kActivityTypeLike)
+        queryExistingLikes.whereKey(kActivityFromUserKey, equalTo: PFUser.currentUser()!)
         queryExistingLikes.cachePolicy = PFCachePolicy.NetworkOnly
         queryExistingLikes.findObjectsInBackgroundWithBlock { (activities, error) in
             if error == nil {
-                for activity in activities! as [PFObject] {
+                for activity in activities! as! [PFObject] {
 // FIXME: To be removed! this is synchronous!                    activity.delete()
                     activity.deleteInBackground()
                 }
@@ -102,15 +103,15 @@ class Utility {
                         
                         var isLikedByCurrentUser = false
                         
-                        for activity in objects! as [PFObject] {
-                            if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
-                                likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-                            } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment {
-                                commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+                        for activity in objects! as! [PFObject] {
+                            if (activity.objectForKey(kActivityTypeKey) as! String) == kActivityTypeLike {
+                                likers.append(activity.objectForKey(kActivityFromUserKey) as! PFUser)
+                            } else if (activity.objectForKey(kActivityTypeKey) as! String) == kActivityTypeComment {
+                                commenters.append(activity.objectForKey(kActivityFromUserKey) as! PFUser)
                             }
                             
-                            if (activity.objectForKey(kPAPActivityFromUserKey) as! PFUser).objectId == PFUser.currentUser()!.objectId {
-                                if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
+                            if (activity.objectForKey(kActivityFromUserKey) as! PFUser).objectId == PFUser.currentUser()!.objectId {
+                                if (activity.objectForKey(kActivityTypeKey) as! String) == kActivityTypeLike {
                                     isLikedByCurrentUser = true
                                 }
                             }
@@ -119,7 +120,7 @@ class Utility {
                         Cache.sharedCache.setAttributesForPhoto(photo, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
                     }
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(UtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: photo, userInfo: [PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey: false])
+                    NSNotificationCenter.defaultCenter().postNotificationName(UtilityUserLikedUnlikedPhotoCallbackFinishedNotification, object: photo, userInfo: [PhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey: false])
                 }
 
             } else {
@@ -147,20 +148,20 @@ class Utility {
         let smallRoundedImageData: NSData = UIImagePNGRepresentation(smallRoundedImage)!
 
         if mediumImageData.length > 0 {
-            let fileMediumImage: PFFile = PFFile!(data: mediumImageData)
+            let fileMediumImage: PFFile = PFFile(data: mediumImageData)
             fileMediumImage.saveInBackgroundWithBlock { (succeeded, error) in
                 if error == nil {
-                    PFUser.currentUser()!.setObject(fileMediumImage, forKey: kPAPUserProfilePicMediumKey)
+                    PFUser.currentUser()!.setObject(fileMediumImage, forKey: kUserProfilePicMediumKey)
                     PFUser.currentUser()!.saveInBackground()
                 }
             }
         }
         
         if smallRoundedImageData.length > 0 {
-            let fileSmallRoundedImage: PFFile = PFFile!(data: smallRoundedImageData)
+            let fileSmallRoundedImage: PFFile = PFFile(data: smallRoundedImageData)
             fileSmallRoundedImage.saveInBackgroundWithBlock { (succeeded, error) in
                 if error == nil {
-                    PFUser.currentUser()!.setObject(fileSmallRoundedImage, forKey: kPAPUserProfilePicSmallKey)
+                    PFUser.currentUser()!.setObject(fileSmallRoundedImage, forKey: kUserProfilePicSmallKey)
                     PFUser.currentUser()!.saveInBackground()
                 }
             }
@@ -170,13 +171,13 @@ class Utility {
 
     class func userHasValidFacebookData(user: PFUser) -> Bool {
         // Check that PFUser has valid fbid that matches current FBSessions userId
-        let facebookId = user.objectForKey(kPAPUserFacebookIDKey) as? String
-        return (facebookId != nil && facebookId!.characters.count > 0 && facebookId == ParseFacebookUtilsV4.session()!.accessTokenData.userID)
+        let facebookId = user.objectForKey(kUserFacebookIDKey) as? String
+        return (facebookId != nil && facebookId!.length > 0 && facebookId == ParseFacebookUtils.session()!.accessTokenData.userID)
     }
    
     class func userHasProfilePictures(user: PFUser) -> Bool {
-        let profilePictureMedium: PFFile? = user.objectForKey(kPAPUserProfilePicMediumKey) as? PFFile
-        let profilePictureSmall: PFFile? = user.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile
+        let profilePictureMedium: PFFile? = user.objectForKey(kUserProfilePicMediumKey) as? PFFile
+        let profilePictureSmall: PFFile? = user.objectForKey(kUserProfilePicSmallKey) as? PFFile
         
         return profilePictureMedium != nil && profilePictureSmall != nil
     }
@@ -208,10 +209,10 @@ class Utility {
             return
         }
         
-        let followActivity = PFObject(className: kPAPActivityClassKey)
-        followActivity.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
-        followActivity.setObject(user, forKey: kPAPActivityToUserKey)
-        followActivity.setObject(kPAPActivityTypeFollow, forKey: kPAPActivityTypeKey)
+        let followActivity = PFObject(className: kActivityClassKey)
+        followActivity.setObject(PFUser.currentUser()!, forKey: kActivityFromUserKey)
+        followActivity.setObject(user, forKey: kActivityToUserKey)
+        followActivity.setObject(kActivityTypeFollow, forKey: kActivityTypeKey)
         
         let followACL = PFACL(user: PFUser.currentUser()!)
         followACL.setPublicReadAccess(true)
@@ -230,10 +231,10 @@ class Utility {
             return
         }
         
-        let followActivity = PFObject(className: kPAPActivityClassKey)
-        followActivity.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
-        followActivity.setObject(user, forKey: kPAPActivityToUserKey)
-        followActivity.setObject(kPAPActivityTypeFollow, forKey: kPAPActivityTypeKey)
+        let followActivity = PFObject(className: kActivityClassKey)
+        followActivity.setObject(PFUser.currentUser()!, forKey: kActivityFromUserKey)
+        followActivity.setObject(user, forKey: kActivityToUserKey)
+        followActivity.setObject(kActivityTypeFollow, forKey: kActivityTypeKey)
         
         let followACL = PFACL(user: PFUser.currentUser()!)
         followACL.setPublicReadAccess(true)
@@ -251,14 +252,14 @@ class Utility {
     }
 
     class func unfollowUserEventually(user: PFUser) {
-        let query = PFQuery(className: kPAPActivityClassKey)
-        query.whereKey(kPAPActivityFromUserKey, equalTo: PFUser.currentUser()!)
-        query.whereKey(kPAPActivityToUserKey, equalTo: user)
-        query.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeFollow)
+        let query = PFQuery(className: kActivityClassKey)
+        query.whereKey(kActivityFromUserKey, equalTo: PFUser.currentUser()!)
+        query.whereKey(kActivityToUserKey, equalTo: user)
+        query.whereKey(kActivityTypeKey, equalTo: kActivityTypeFollow)
         query.findObjectsInBackgroundWithBlock { (followActivities, error) in
             // While normally there should only be one follow activity returned, we can't guarantee that.
             if error == nil {
-                for followActivity: PFObject in followActivities! as [PFObject] {
+                for followActivity: PFObject in followActivities! as! [PFObject] {
                     followActivity.deleteEventually()
                 }
             }
@@ -267,12 +268,12 @@ class Utility {
     }
 
     class func unfollowUsersEventually(users: [PFUser]) {
-        let query = PFQuery(className: kPAPActivityClassKey)
-        query.whereKey(kPAPActivityFromUserKey, equalTo: PFUser.currentUser()!)
-        query.whereKey(kPAPActivityToUserKey, containedIn: users)
-        query.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeFollow)
+        let query = PFQuery(className: kActivityClassKey)
+        query.whereKey(kActivityFromUserKey, equalTo: PFUser.currentUser()!)
+        query.whereKey(kActivityToUserKey, containedIn: users)
+        query.whereKey(kActivityTypeKey, equalTo: kActivityTypeFollow)
         query.findObjectsInBackgroundWithBlock { (activities, error) in
-            for activity in activities! as [PFObject] {
+            for activity in activities! as! [PFObject] {
                 activity.deleteEventually()
             }
         }
@@ -284,18 +285,18 @@ class Utility {
     // MARK Activities
 
     class func queryForActivitiesOnPhoto(photo: PFObject, cachePolicy: PFCachePolicy) -> PFQuery {
-        let queryLikes: PFQuery = PFQuery(className: kPAPActivityClassKey)
-        queryLikes.whereKey(kPAPActivityPhotoKey, equalTo: photo)
-        queryLikes.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeLike)
+        let queryLikes: PFQuery = PFQuery(className: kActivityClassKey)
+        queryLikes.whereKey(kActivityPhotoKey, equalTo: photo)
+        queryLikes.whereKey(kActivityTypeKey, equalTo: kActivityTypeLike)
         
-        let queryComments = PFQuery(className: kPAPActivityClassKey)
-        queryComments.whereKey(kPAPActivityPhotoKey, equalTo: photo)
-        queryComments.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeComment)
+        let queryComments = PFQuery(className: kActivityClassKey)
+        queryComments.whereKey(kActivityPhotoKey, equalTo: photo)
+        queryComments.whereKey(kActivityTypeKey, equalTo: kActivityTypeComment)
         
         let query = PFQuery.orQueryWithSubqueries([queryLikes,queryComments])
         query.cachePolicy = cachePolicy
-        query.includeKey(kPAPActivityFromUserKey)
-        query.includeKey(kPAPActivityPhotoKey)
+        query.includeKey(kActivityFromUserKey)
+        query.includeKey(kActivityPhotoKey)
 
         return query
     }

@@ -23,7 +23,7 @@
 
 #import <ParseUI/ParseUIConstants.h>
 
-NS_ASSUME_NONNULL_BEGIN
+PFUI_ASSUME_NONNULL_BEGIN
 
 /*!
  `PFLogInFields` bitmask specifies the log in elements which are enabled in the view.
@@ -84,14 +84,14 @@ typedef NS_OPTIONS(NSInteger, PFLogInFields) {
 
  @discussion Used to lay out elements correctly when the presenting view controller has translucent elements.
  */
-@property (nullable, nonatomic, weak) UIViewController *presentingViewController;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, weak) UIViewController *presentingViewController;
 
 ///--------------------------------------
 /// @name Customizing the Logo
 ///--------------------------------------
 
 /// The logo. By default, it is the Parse logo.
-@property (nullable, nonatomic, strong) UIView *logo;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong) UIView *logo;
 
 ///--------------------------------------
 /// @name Configure Username Behaviour
@@ -116,57 +116,57 @@ typedef NS_OPTIONS(NSInteger, PFLogInFields) {
 /*!
  @abstract The username text field. It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) PFTextField *usernameField;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) PFTextField *usernameField;
 
 /*!
  @abstract The password text field. It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) PFTextField *passwordField;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) PFTextField *passwordField;
 
 /*!
  @abstract The password forgotten button. It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) UIButton *passwordForgottenButton;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UIButton *passwordForgottenButton;
 
 /*!
  @abstract The log in button. It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) UIButton *logInButton;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UIButton *logInButton;
 
 /*!
  @abstract The Facebook button. It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) UIButton *facebookButton;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UIButton *facebookButton;
 
 /*!
  @abstract The Twitter button. It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) UIButton *twitterButton;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UIButton *twitterButton;
 
 /*!
  @abstract The sign up button. It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) UIButton *signUpButton;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UIButton *signUpButton;
 
 /*!
  @abstract It is `nil` if the element is not enabled.
  */
-@property (nullable, nonatomic, strong, readonly) UIButton *dismissButton;
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UIButton *dismissButton;
 
 /*!
  @abstract The facebook/twitter login label.
 
  @deprecated This property is deprecated and will always be nil.
  */
-@property (nullable, nonatomic, strong, readonly) UILabel *externalLogInLabel __attribute__(PARSE_UI_DEPRECATED("This property is deprecated and will always be nil."));
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UILabel *externalLogInLabel __attribute__(PARSE_UI_DEPRECATED("This property is deprecated and will always be nil."));
 
 /*!
  @abstract The sign up label.
 
  @deprecated This property is deprecated and will always be nil.
  */
-@property (nullable, nonatomic, strong, readonly) UILabel *signUpLabel __attribute__(PARSE_UI_DEPRECATED("This property is deprecated and will always be nil."));
+@property (PFUI_NULLABLE_PROPERTY nonatomic, strong, readonly) UILabel *signUpLabel __attribute__(PARSE_UI_DEPRECATED("This property is deprecated and will always be nil."));
 
 @end
 
-NS_ASSUME_NONNULL_END
+PFUI_ASSUME_NONNULL_END
