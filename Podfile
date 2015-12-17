@@ -8,27 +8,32 @@ xcodeproj '/Volumes/WINHD/Repos/MHImageTabBar/MHImageTabBar.xcodeproj'
 target 'MHImageTabBar' do
 
 use_frameworks!
-  #pod 'Parse'
+  pod 'Parse'
+  pod 'ParseUI'
   #pod 'Bolts'
-  pod 'Parse', '~> 1.7.5'
+  #pod 'Parse', '~> 1.7.5'
   #pod 'ParseFacebookUtils', '~> 1.7.5'
   pod 'ParseFacebookUtilsV4'
-  pod 'ParseCrashReporting', '~> 1.7.5'
+  pod 'ParseTwitterUtils'
+  pod 'FBSDKCoreKit'
+  pod 'TwitterKit'
+  pod 'TwitterCore'
+
+#pod 'ParseCrashReporting', '~> 1.7.5'
 
 
   # Workaround for the unknown crashes Bolts (https://github.com/BoltsFramework/Bolts-iOS/issues/102)
-  pod 'Bolts', :git => 'https://github.com/teklabs/Bolts-iOS.git'
-  pod 'ParseUI', '1.1.4'
+  #pod 'Bolts', :git => https://github.com/teklabs/Bolts-iOS.git
+  #pod 'ParseUI', '1.1.4'
   pod 'MBProgressHUD'
   pod 'FormatterKit'
   
   pod 'UIImageAFAdditions', :git => 'https://github.com/teklabs/UIImageAFAdditions.git'
 
-  #pod 'ParseTwitterUtils'
-  #pod 'TwitterKit'
-  #pod 'TwitterCore'
+
+
   pod 'Synchronized'
-  #pod 'FBSDKCoreKit'
+
   
   pod 'IOStickyHeader'
   pod 'AHKActionSheet', '~> 0.5'

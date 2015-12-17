@@ -15,6 +15,7 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
     
     override init(style: UITableViewStyle, className: String?) {
         super.init(style: style, className: className)
+        
         // The className to query on
         self.parseClassName = kActivityClassKey
         
@@ -34,7 +35,7 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     
     // MARK - UIViewController
     
@@ -47,8 +48,8 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         texturedBackgroundView.backgroundColor = UIColor.blackColor()
         self.tableView.backgroundView = texturedBackgroundView
         
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "LogoNavigationBar.png"))
-        
+        //self.navigationItem.titleView = UIImageView(image: UIImage(named: "LogoNavigationBar.png"))
+        self.navigationItem.title = "Activity"
         // Add Settings button
         //self.navigationItem.rightBarButtonItem = SettingsButtonItem(target: self, action: 
         //Selector("settingsButtonAction:"))
@@ -57,12 +58,7 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         
         self.blankTimelineView = UIView(frame: self.tableView.bounds)
         
-        let button = UIButton(type: UIButtonType.Custom)
-        button.setBackgroundImage(UIImage(named: "ActivityFeedBlank.png"), forState: UIControlState.Normal)
-        button.frame = CGRectMake(24.0, 113.0, 271.0, 140.0)
-        button.addTarget(self, action: Selector("inviteFriendsButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
-        self.blankTimelineView!.addSubview(button)
-        
+       
         lastRefresh = NSUserDefaults.standardUserDefaults().objectForKey(kUserDefaultsActivityFeedViewControllerLastRefreshKey) as? NSDate
     }
     

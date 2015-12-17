@@ -9,8 +9,8 @@
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
-//#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
-#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+//#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <ParseUI/ParseUI.h>
 #import <Bolts/Bolts.h>
 #import <MBProgressHUD/MBProgressHUD.h>

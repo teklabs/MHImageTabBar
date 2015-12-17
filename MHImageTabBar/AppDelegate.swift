@@ -4,7 +4,7 @@ import Parse
 //import ParseFacebookUtils
 
 import ParseFacebookUtilsV4
-//import ParseTwitterUtils
+import ParseTwitterUtils
 import MBProgressHUD
 
 @UIApplicationMain
@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("oUuHAfy2K9KHPOj12TumNGe7tx2GSbyhCXjHCz8o", clientKey: "fJ2fqkZ1lsRqXfRiS2z6EM2A7egK7xQQirnSx77J")
         //PFFacebookUtils.initializeFacebook()
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions);
-        //PFTwitterUtils.initializeWithConsumerKey("3Q9hMEKqqSg4ie2pibZ2sVJuv", consumerSecret: "IEZ9wv2d1EpXNGFKGp7sAGdxRtyqtPwygyciFZwTHTGhPp4FMj")
+        PFTwitterUtils.initializeWithConsumerKey("3Q9hMEKqqSg4ie2pibZ2sVJuv", consumerSecret: "IEZ9wv2d1EpXNGFKGp7sAGdxRtyqtPwygyciFZwTHTGhPp4FMj")
 
         
         let userDefaults = NSUserDefaults.groupUserDefaults()

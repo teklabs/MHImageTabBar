@@ -12,7 +12,7 @@ class Utility {
     // MARK:- Utility
     
     // MARK Like Photos
-
+    /*
     class func likePhotoInBackground(photo: PFObject, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         let queryExistingLikes = PFQuery(className: kActivityClassKey)
         queryExistingLikes.whereKey(kActivityPhotoKey, equalTo: photo)
@@ -149,7 +149,7 @@ class Utility {
         let smallRoundedImageData: NSData = UIImagePNGRepresentation(smallRoundedImage)!
 
         if mediumImageData.length > 0 {
-            let fileMediumImage: PFFile = PFFile(data: mediumImageData)
+            let fileMediumImage: PFFile! = PFFile(data: mediumImageData)
             fileMediumImage.saveInBackgroundWithBlock { (succeeded, error) in
                 if error == nil {
                     PFUser.currentUser()!.setObject(fileMediumImage, forKey: kUserProfilePicMediumKey)
@@ -159,7 +159,7 @@ class Utility {
         }
         
         if smallRoundedImageData.length > 0 {
-            let fileSmallRoundedImage: PFFile = PFFile(data: smallRoundedImageData)
+            let fileSmallRoundedImage: PFFile! = PFFile(data: smallRoundedImageData)
             fileSmallRoundedImage.saveInBackgroundWithBlock { (succeeded, error) in
                 if error == nil {
                     PFUser.currentUser()!.setObject(fileSmallRoundedImage, forKey: kUserProfilePicSmallKey)
@@ -207,7 +207,7 @@ class Utility {
     }
 
     // MARK User Following
-
+/*
     class func followUserInBackground(user: PFUser, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         if user.objectId == PFUser.currentUser()!.objectId {
             return
@@ -285,7 +285,7 @@ class Utility {
             Cache.sharedCache.setFollowStatus(false, user: user)
         }
     }
- 
+ */
     // MARK Activities
 
     class func queryForActivitiesOnPhoto(photo: PFObject, cachePolicy: PFCachePolicy) -> PFQuery {
@@ -366,4 +366,5 @@ class Utility {
         // Save context
         CGContextRestoreGState(context)
     }
+*/
 }

@@ -403,7 +403,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YGU-6Y-oiA">
-                        <barButtonItem key="leftBarButtonItem" title="Notif" id="B3L-s6-MgT"/>
+                        <barButtonItem key="leftBarButtonItem" title="Notif" id="B3L-s6-MgT">
+                            <connections>
+                                <segue destination="qrr-DW-cm3" kind="show" id="dT6-zU-exT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ButtonImageSettings" id="sFb-WF-emA">
                             <connections>
                                 <segue destination="K8Q-UT-bvy" kind="push" id="lPN-ZG-sJx"/>
@@ -436,17 +440,17 @@
             </objects>
             <point key="canvasLocation" x="324" y="1093"/>
         </scene>
-        <!--Prayers-->
+        <!--Title-->
         <scene sceneID="Sdd-Wa-Fzr">
             <objects>
-                <tableViewController id="qrr-DW-cm3" customClass="PrayersViewController" customModule="MHImageTabBar" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="qrr-DW-cm3" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="kX4-n9-gLO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PrayerCell" rowHeight="60" id="xuB-Hl-CtL" customClass="PrayerCell" customModule="MHImageTabBar" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xuB-Hl-CtL" id="6Wg-M6-lJ5">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="60"/>
@@ -493,7 +497,7 @@
                             <outlet property="delegate" destination="qrr-DW-cm3" id="iQW-Y8-J35"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Prayers" id="Ers-aN-HFp">
+                    <navigationItem key="navigationItem" title="Title" id="Ers-aN-HFp">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="reA-WO-67q"/>
                     </navigationItem>
                     <connections>
@@ -504,10 +508,10 @@
             </objects>
             <point key="canvasLocation" x="1199" y="268"/>
         </scene>
-        <!--Prayer Detail View Controller-->
+        <!--View Controller-->
         <scene sceneID="G9x-eV-Leq">
             <objects>
-                <viewController id="NZY-R6-tqB" customClass="PrayerDetailViewController" customModule="MHImageTabBar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NZY-R6-tqB" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hBj-T3-GNI"/>
                         <viewControllerLayoutGuide type="bottom" id="iiZ-w7-rDB"/>
@@ -538,11 +542,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ynu-SZ-BwU"/>
-                    <connections>
-                        <outlet property="categoryLabel" destination="IMl-F1-SfS" id="qJv-xb-9h8"/>
-                        <outlet property="nameLabel" destination="UVP-Ci-7AX" id="TV5-Lw-SjM"/>
-                        <outlet property="noteTextField" destination="dVA-Wn-J1J" id="ftf-t9-a3b"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fy6-Dg-NO0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
