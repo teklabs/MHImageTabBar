@@ -2,9 +2,10 @@ import Foundation
 import CoreGraphics
 import UIImageAFAdditions
 import Parse
-import ParseFacebookUtils
-//import ParseFacebookUtilsV4
+//import ParseFacebookUtils
 import FBSDKCoreKit
+import ParseFacebookUtilsV4
+
 
 class Utility {
 
@@ -169,12 +170,14 @@ class Utility {
         print("Processed profile picture")
     }
 
+    /*
     class func userHasValidFacebookData(user: PFUser) -> Bool {
         // Check that PFUser has valid fbid that matches current FBSessions userId
         let facebookId = user.objectForKey(kUserFacebookIDKey) as? String
-        return (facebookId != nil && facebookId!.length > 0 && facebookId == ParseFacebookUtils.session()!.accessTokenData.userID)
+        let pfSession = PFFacebookUtils.PFSession.user
+        return (facebookId != nil && facebookId!.characters.count > 0 && facebookId == PFFacebookUtils.PFSession()!.accessTokenData.userID)
     }
-   
+   */
     class func userHasProfilePictures(user: PFUser) -> Bool {
         let profilePictureMedium: PFFile? = user.objectForKey(kUserProfilePicMediumKey) as? PFFile
         let profilePictureSmall: PFFile? = user.objectForKey(kUserProfilePicSmallKey) as? PFFile
@@ -195,9 +198,10 @@ class Utility {
         
         let displayNameComponents: [String] = displayName!.componentsSeparatedByString(" ")
         var firstName = displayNameComponents[0]
+        print(firstName)
         if firstName.characters.count > 100 {
             // truncate to 100 so that it fits in a Push payload
-            firstName = firstName.subString(0, length: 100)
+            //firstName = firstName.subString(0, length: 100)
         }
         return firstName
     }

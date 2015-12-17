@@ -325,9 +325,9 @@ class PhotoDetailsViewController : PFQueryTableViewController, UITextFieldDelega
     }
 
     func shouldPresentAccountViewForUser(user: PFUser) {
-        let accountViewController = AccountViewController(user: user)
+        //let accountViewController = AccountViewController(user: user)
         print("Presenting account view controller with user: \(user)")
-        self.navigationController!.pushViewController(accountViewController, animated: true)
+        //self.navigationController!.pushViewController(accountViewController, animated: true)
     }
 
     func backButtonAction(sender: AnyObject) {

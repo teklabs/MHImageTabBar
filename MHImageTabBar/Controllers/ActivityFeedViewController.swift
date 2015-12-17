@@ -98,11 +98,16 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.row < self.objects!.count {
             let activity: PFObject = self.objects![indexPath.row] as! PFObject
+             if activity.objectForKey(kActivityFromUserKey) != nil {
+             print("Presenting account view controller with user: \(activity.objectForKey(kActivityFromUserKey) as! PFUser)")
+            }
+            /*
             if activity.objectForKey(kActivityFromUserKey) != nil {
                 let detailViewController = AccountViewController(user: activity.objectForKey(kActivityFromUserKey) as! PFUser)
                 print("Presenting account view controller with user: \(activity.objectForKey(kActivityFromUserKey) as! PFUser)")
                 self.navigationController!.pushViewController(detailViewController, animated: true)
             }
+*/
         } else if self.paginationEnabled {
             // load more
             self.loadNextPage()
@@ -228,9 +233,9 @@ class ActivityFeedViewController: PFQueryTableViewController, ActivityCellDelega
     
     func cell(cellView: BaseTextCell, didTapUserButton aUser: PFUser) {
         // Push account view controller
-        let accountViewController = AccountViewController(user: aUser)
+        //let accountViewController = AccountViewController(user: aUser)
         print("Presenting account view controller with user: \(aUser)")
-        self.navigationController!.pushViewController(accountViewController, animated: true)
+        //self.navigationController!.pushViewController(accountViewController, animated: true)
     }
     
     

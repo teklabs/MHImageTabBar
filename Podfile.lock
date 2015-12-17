@@ -7,8 +7,17 @@ PODS:
   - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
-  - Facebook-iOS-SDK (3.24.1):
-    - Bolts (~> 1.2)
+  - FBSDKCoreKit (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.8.0)
+    - FBSDKCoreKit/no-arc (= 4.8.0)
+  - FBSDKCoreKit/arc (4.8.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.8.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.8.0):
+    - FBSDKCoreKit
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -35,9 +44,10 @@ PODS:
   - ParseCrashReporting (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
     - Parse (~> 1.7.5.3)
-  - ParseFacebookUtils (1.7.5.3):
+  - ParseFacebookUtilsV4 (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
-    - Facebook-iOS-SDK (~> 3.23)
+    - FBSDKCoreKit (~> 4.0)
+    - FBSDKLoginKit (~> 4.0)
     - Parse (~> 1.7.5.3)
   - ParseUI (1.1.4):
     - Parse (~> 1.7)
@@ -53,7 +63,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - Parse (~> 1.7.5)
   - ParseCrashReporting (~> 1.7.5)
-  - ParseFacebookUtils (~> 1.7.5)
+  - ParseFacebookUtilsV4
   - ParseUI (= 1.1.4)
   - Synchronized
   - UIImageAFAdditions (from `https://github.com/teklabs/UIImageAFAdditions.git`)
@@ -76,13 +86,14 @@ SPEC CHECKSUMS:
   AHKActionSheet: 0b7d3bc6467dd934441fd82beb3911fc1f7bdfd2
   AMPopTip: b0b5d009f3ed47b10f118438a18e0ab5cd03c40d
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
-  Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
+  FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
+  FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   IOStickyHeader: 128bab4da4ee6e32766ee85503b0a58b48f111b4
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   ParseCrashReporting: 36d2e2770d7502d943b81c013acd5193946ced46
-  ParseFacebookUtils: 008a24dc35884519ed6a6750648beb5149f1fad9
+  ParseFacebookUtilsV4: ea5db22e87b91cbf99b9d156642e2b97a4db7d51
   ParseUI: d1228541b02a36a7354c8f47747f5f7a89cf1ff0
   Synchronized: 576e9b6c148d49cbb5a60cbcb2a7569768f4ec79
   UIImageAFAdditions: bdb543889f97aea5cc9a8d0c985c03bb8b4ceb96

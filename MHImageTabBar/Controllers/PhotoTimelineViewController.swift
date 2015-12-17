@@ -50,6 +50,12 @@ class PhotoTimelineViewController: PFQueryTableViewController, PhotoHeaderViewDe
         fatalError("init(coder:) has not been implemented")
     }
 
+    
+    /*
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+*/
     // MARK:- UIViewController
 
     override func viewDidLoad() {
@@ -275,9 +281,9 @@ class PhotoTimelineViewController: PFQueryTableViewController, PhotoHeaderViewDe
     // MARK:- PhotoHeaderViewDelegate
 
     func photoHeaderView(photoHeaderView: PhotoHeaderView, didTapUserButton button: UIButton, user: PFUser) {
-        let accountViewController: AccountViewController = AccountViewController(user: user)
+        //let accountViewController: AccountViewController = AccountViewController(user: user)
         print("Presenting account view controller with user: \(user)")
-        self.navigationController!.pushViewController(accountViewController, animated: true)
+        //self.navigationController!.pushViewController(accountViewController, animated: true)
     }
 
     func photoHeaderView(photoHeaderView: PhotoHeaderView, didTapLikePhotoButton button: UIButton, photo: PFObject) {

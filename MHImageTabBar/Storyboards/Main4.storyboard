@@ -341,10 +341,10 @@
             </objects>
             <point key="canvasLocation" x="1870" y="1013"/>
         </scene>
-        <!--GrowVC-->
+        <!--AccountViewController-->
         <scene sceneID="hWt-P1-YYG">
             <objects>
-                <viewController id="eaH-vC-AxC" customClass="IOGrowVC" customModule="MHImageTabBar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="AccountViewController" id="eaH-vC-AxC" customClass="AccountViewController" customModule="MHImageTabBar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8jj-lp-jaA"/>
                         <viewControllerLayoutGuide type="bottom" id="yvO-9b-UGi"/>

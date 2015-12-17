@@ -288,6 +288,11 @@
 					D5070B921B9DEDBE000CDE1A = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = V3QESDZJG8;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -383,10 +388,8 @@
 			files = (
 				D5070BB91B9DEEA2000CDE1A /* MHImageTabBarViewController.swift in Sources */,
 				A66D259A1C206D8E00C55681 /* Constants.swift in Sources */,
-				A68970F41C21BD700021B6F3 /* Utility.swift in Sources */,
 				A66D25841C1F2B8F00C55681 /* AccountViewController.swift in Sources */,
 				A68971011C220BE10021B6F3 /* PhotoCell.swift in Sources */,
-				D5070B991B9DEDBE000CDE1A /* AppDelegate.swift in Sources */,
 				A66D25871C1F2BBC00C55681 /* Main1ViewController.swift in Sources */,
 				A68970FF1C220B070021B6F3 /* PhotoTimelineViewController.swift in Sources */,
 				A66D25961C206BA400C55681 /* ComplexConstants.swift in Sources */,
@@ -396,6 +399,8 @@
 				A68970F01C21BAE10021B6F3 /* ActivityCell.swift in Sources */,
 				A68970F21C21BAE10021B6F3 /* BaseTextCell.swift in Sources */,
 				A66D25981C206C6F00C55681 /* Extensions.swift in Sources */,
+				D5070B991B9DEDBE000CDE1A /* AppDelegate.swift in Sources */,
+				A68970F41C21BD700021B6F3 /* Utility.swift in Sources */,
 				A68970F61C21BE340021B6F3 /* Cache.swift in Sources */,
 				A68971061C2213B30021B6F3 /* PhotoDetailsFooterView.swift in Sources */,
 				A66D258A1C1F2CB400C55681 /* ProfileHeader.swift in Sources */,
@@ -462,7 +467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -501,7 +506,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
