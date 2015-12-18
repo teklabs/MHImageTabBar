@@ -18,16 +18,16 @@ class Main1ViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let twitterImage = UIImage(named: "twitter_icon.png")!
-        let plusImage = UIImage(named: "googleplus_icon.png")!
+        let oneImage = UIImage(named: "one.png")!
+        let twoImage = UIImage(named: "two.png")!
         
-        let twitter = ActionButtonItem(title: "Action Item 1", image: twitterImage)
-        twitter.action = { item in print("Action Item 1...") }
+        let oneButton = ActionButtonItem(title: "Action Item 1", image: oneImage)
+        oneButton.action = { item in print("Action Item 1...") }
         
-        let google = ActionButtonItem(title: "Action Item 2", image: plusImage)
-        google.action = { item in print("Action Item 2...") }
+        let twoButton = ActionButtonItem(title: "Action Item 2", image: twoImage)
+        twoButton.action = { item in print("Action Item 2...") }
         
-        actionButton = ActionButton(attachedToView: self.view, items: [twitter, google])
+        actionButton = ActionButton(attachedToView: self.view, items: [oneButton, twoButton])
         actionButton.action = { button in button.toggleMenu() }
         actionButton.setTitle("+", forState: .Normal)
         

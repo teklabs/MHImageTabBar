@@ -543,6 +543,8 @@
 		A5B9B76939498EB4A489B1C21FF7F70F /* PFCurrentUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBBB956A03F5635050004FA5C719EB88 /* PFCurrentUserController.m */; };
 		A6A32F22F62CEC143067C0CAEF084D26 /* FBSDKPaymentObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CC01845FBB0C74789EF98AF4E02BFB1 /* FBSDKPaymentObserver.m */; };
 		A6AF94016EAB862B92EC904EE78CD8CE /* zh-Hant.lproj in Resources */ = {isa = PBXBuildFile; fileRef = DD021741D2443B479CBB01AB9CE3526D /* zh-Hant.lproj */; };
+		A6BDFF141C2460030058E1B9 /* TabBarActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BDFF131C2460030058E1B9 /* TabBarActionButton.swift */; };
+		A6BDFF161C24607E0058E1B9 /* TabBarActionButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BDFF151C24607E0058E1B9 /* TabBarActionButtonItem.swift */; };
 		A6D26AE31B9B08938AB99A586DBCE096 /* ObjCSynchronized.m in Sources */ = {isa = PBXBuildFile; fileRef = AF9E8808D1303403DAD7B1D10CC4C735 /* ObjCSynchronized.m */; };
 		A6EE029127CE81D4FF70969A797E5F49 /* PFMutableFileState.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB3D255F50CB993FDE2C451E101C6D7 /* PFMutableFileState.m */; };
 		A750631E4E914D60B2CE2050134F57E8 /* PFTwitterLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = A9018B1595BBFE084105EB6589AD5773 /* PFTwitterLocalization.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -1552,6 +1554,8 @@
 		A65ECDCBE0F8EA3F06B8DD34E95B858F /* PFCoreDataProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFCoreDataProvider.h; path = Parse/Internal/PFCoreDataProvider.h; sourceTree = "<group>"; };
 		A667B8A0E4B7D3E695F6E46C69D00988 /* FBSDKLoginTooltipView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKLoginTooltipView.m; path = FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginTooltipView.m; sourceTree = "<group>"; };
 		A697FFC668829FD6D7BD1DC5F4AEE435 /* FBSDKBridgeAPIResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKBridgeAPIResponse.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIResponse.h; sourceTree = "<group>"; };
+		A6BDFF131C2460030058E1B9 /* TabBarActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarActionButton.swift; path = Source/TabBarActionButton.swift; sourceTree = "<group>"; };
+		A6BDFF151C24607E0058E1B9 /* TabBarActionButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarActionButtonItem.swift; path = Source/TabBarActionButtonItem.swift; sourceTree = "<group>"; };
 		A783B3EF26C84E08C6D65C62A066F3CC /* PFTwitterUtils_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFTwitterUtils_Private.h; path = ParseTwitterUtils/Internal/PFTwitterUtils_Private.h; sourceTree = "<group>"; };
 		A7DED552B5DDE49989582E7A1EF2E503 /* PFURLConstructor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PFURLConstructor.h; path = Parse/Internal/HTTPRequest/PFURLConstructor.h; sourceTree = "<group>"; };
 		A83564DD6579072B4B7DD9C6D275AAA4 /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = ja.lproj; path = Localizations/ja.lproj; sourceTree = "<group>"; };
@@ -2836,6 +2840,8 @@
 			children = (
 				977C3AD28154B69DC945ABF5329D4C24 /* ActionButton.swift */,
 				6AB2EF2B4ED4548CE7DD15E2352F544B /* ActionButtonItem.swift */,
+				A6BDFF131C2460030058E1B9 /* TabBarActionButton.swift */,
+				A6BDFF151C24607E0058E1B9 /* TabBarActionButtonItem.swift */,
 				CB16588773BD49D39D3B81310A3CC182 /* Support Files */,
 			);
 			path = ActionButton;
@@ -4607,7 +4613,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6BDFF161C24607E0058E1B9 /* TabBarActionButtonItem.swift in Sources */,
 				6F2BFFA47E16EDD96FD0E18FDD63563A /* ActionButton-dummy.m in Sources */,
+				A6BDFF141C2460030058E1B9 /* TabBarActionButton.swift in Sources */,
 				EFB1F2CC52853D71D3E6B380CA766F33 /* ActionButton.swift in Sources */,
 				09E5B3AAB8B6F162F55BA87FCDF0E426 /* ActionButtonItem.swift in Sources */,
 			);

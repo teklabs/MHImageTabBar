@@ -1,5 +1,6 @@
 
 import UIKit
+import TabBarActionButton
 
 struct MainViewController {
     let storyboardName: String
@@ -12,6 +13,8 @@ class MHImageTabBarViewController: UIViewController {
     private let imageViews: [UIImageView]
     private var tabBarVisibleConstant = CGFloat(0)
     private var tabBarHiddenConstant: CGFloat!
+    
+    var tabBarActionButton: TabBarActionButton!
     
     @IBOutlet var tabBar: UIView!
     @IBOutlet var tabBarSeparator: UIView!
@@ -109,6 +112,23 @@ class MHImageTabBarViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        
+        
+        // Do any additional setup after loading the view.
+        let oneImage = UIImage(named: "one.png")!
+        let twoImage = UIImage(named: "two.png")!
+        
+        let oneButton = TabBarActionButtonItem(title: "Action Item 1", image: oneImage)
+        oneButton.action = { item in print("Action Item 1...") }
+        
+        let twoButton = TabBarActionButtonItem(title: "Action Item 2", image: twoImage)
+        twoButton.action = { item in print("Action Item 2...") }
+        
+        tabBarActionButton = TabBarActionButton(attachedToView: self.view, items: [oneButton, twoButton])
+        tabBarActionButton.action = { button in button.toggleMenu() }
+        tabBarActionButton.setTitle("+", forState: .Normal)
+        
+        tabBarActionButton.backgroundColor = UIColor(red: 238.0/255.0, green: 130.0/255.0, blue: 34.0/255.0, alpha:1.0)
         
         selectedViewControllerIndex = 0
     }
