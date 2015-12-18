@@ -38,6 +38,7 @@ use_frameworks!
   pod 'IOStickyHeader'
   pod 'AHKActionSheet', '~> 0.5'
   pod 'AMPopTip', '~> 0.7'
+  pod 'ActionButton', git: 'https://github.com/teklabs/ActionButton.git', branch: 'master'
 end
 
 

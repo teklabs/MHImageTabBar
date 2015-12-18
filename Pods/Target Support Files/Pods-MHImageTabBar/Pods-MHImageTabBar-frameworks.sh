@@ -86,6 +86,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MHImageTabBar/AHKActionSheet.framework"
   install_framework "Pods-MHImageTabBar/AMPopTip.framework"
+  install_framework "Pods-MHImageTabBar/ActionButton.framework"
   install_framework "Pods-MHImageTabBar/Bolts.framework"
   install_framework "Pods-MHImageTabBar/FBSDKCoreKit.framework"
   install_framework "Pods-MHImageTabBar/FBSDKLoginKit.framework"
@@ -102,6 +103,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MHImageTabBar/AHKActionSheet.framework"
   install_framework "Pods-MHImageTabBar/AMPopTip.framework"
+  install_framework "Pods-MHImageTabBar/ActionButton.framework"
   install_framework "Pods-MHImageTabBar/Bolts.framework"
   install_framework "Pods-MHImageTabBar/FBSDKCoreKit.framework"
   install_framework "Pods-MHImageTabBar/FBSDKLoginKit.framework"

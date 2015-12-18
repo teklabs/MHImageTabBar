@@ -14,8 +14,8 @@ struct MHImageTabBarConstants {
     static let mainViewControllers = [
         MainViewController(storyboardName: "Main1", imageName: "one"),
         MainViewController(storyboardName: "Main2", imageName: "two"),
-        MainViewController(storyboardName: "Main3", imageName: "three"),
-        MainViewController(storyboardName: "Main4", imageName: "four")
+        MainViewController(storyboardName: "Main3", imageName: "three")
+        //MainViewController(storyboardName: "Main4", imageName: "four")
     ]
     
     static let RTL = false

@@ -1,4 +1,5 @@
 PODS:
+  - ActionButton (0.1.4)
   - AHKActionSheet (0.5.3)
   - AMPopTip (0.10.1)
   - Bolts (1.5.0):
@@ -61,6 +62,7 @@ PODS:
   - UIImageAFAdditions (0.1)
 
 DEPENDENCIES:
+  - ActionButton (from `https://github.com/teklabs/ActionButton.git`, branch `master`)
   - AHKActionSheet (~> 0.5)
   - AMPopTip (~> 0.7)
   - FBSDKCoreKit
@@ -77,15 +79,22 @@ DEPENDENCIES:
   - UIImageAFAdditions (from `https://github.com/teklabs/UIImageAFAdditions.git`)
 
 EXTERNAL SOURCES:
+  ActionButton:
+    :branch: master
+    :git: https://github.com/teklabs/ActionButton.git
   UIImageAFAdditions:
     :git: https://github.com/teklabs/UIImageAFAdditions.git
 
 CHECKOUT OPTIONS:
+  ActionButton:
+    :commit: f55c0c5800bb0e1c1c42f557be30454eebce0dbb
+    :git: https://github.com/teklabs/ActionButton.git
   UIImageAFAdditions:
     :commit: bd07487284ad76e611fcdcd6401ae409a1d9a1fd
     :git: https://github.com/teklabs/UIImageAFAdditions.git
 
 SPEC CHECKSUMS:
+  ActionButton: 1b94024013cf57e960d09aa56792f29e1bb545e0
   AHKActionSheet: 0b7d3bc6467dd934441fd82beb3911fc1f7bdfd2
   AMPopTip: b0b5d009f3ed47b10f118438a18e0ab5cd03c40d
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
