@@ -53,8 +53,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    // MARK: - UITabBarControllerDelegate
+    
+    func tabBarController(aTabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        // The empty UITabBarItem behind our Camera button should not load a view controller
+        return viewController != aTabBarController.viewControllers![TabBarControllerViewControllerIndex.EmptyTabBarItemIndex.rawValue]
+    }
 
-
+    
+    
     func application(application: UIApplication,
         openURL url: NSURL,
         sourceApplication: String?,

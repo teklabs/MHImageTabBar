@@ -1,20 +1,19 @@
 
 import UIKit
-import TabBarActionButton
 
 struct MainViewController {
     let storyboardName: String
     let imageName: String
 }
 
-class MHImageTabBarViewController: UIViewController {
+class MHImageTabBarViewController: UIViewController, UIImagePickerControllerDelegate {
     
     let viewControllers: [UIViewController]
     private let imageViews: [UIImageView]
     private var tabBarVisibleConstant = CGFloat(0)
     private var tabBarHiddenConstant: CGFloat!
     
-    var tabBarActionButton: TabBarActionButton!
+    //var tabBarActionButton: TabBarActionButton!
     
     @IBOutlet var tabBar: UIView!
     @IBOutlet var tabBarSeparator: UIView!
@@ -115,6 +114,15 @@ class MHImageTabBarViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
+        
+        let prayerActionButton = UIButton(type: UIButtonType.Custom)
+        prayerActionButton.frame = CGRectMake(94.0, 0.0, 131.0, self.tabBar.bounds.size.height)
+        prayerActionButton.setImage(UIImage(named: "ButtonCamera.png"), forState: UIControlState.Normal)
+        prayerActionButton.setImage(UIImage(named: "ButtonCameraSelected.png"), forState: UIControlState.Highlighted)
+        prayerActionButton.addTarget(self, action: Selector("prayerButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.tabBar.addSubview(prayerActionButton)
+        
+        /*
         let oneImage = UIImage(named: "one.png")!
         let twoImage = UIImage(named: "two.png")!
         
@@ -127,11 +135,50 @@ class MHImageTabBarViewController: UIViewController {
         tabBarActionButton = TabBarActionButton(attachedToView: self.view, items: [oneButton, twoButton])
         tabBarActionButton.action = { button in button.toggleMenu() }
         tabBarActionButton.setTitle("+", forState: .Normal)
-        
+
         tabBarActionButton.backgroundColor = UIColor(red: 238.0/255.0, green: 130.0/255.0, blue: 34.0/255.0, alpha:1.0)
-        
+        */
         selectedViewControllerIndex = 0
     }
+    
+    
+    // MARK:- ()
+    
+    ///////////////////////////////
+    
+    
+    func prayerButtonAction(sender: AnyObject) {
+        let actionController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let myProfileAction = UIAlertAction(title: NSLocalizedString("My Profile", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            self.navigationController!.pushViewController(AccountViewController(), animated: true)
+        })
+        let findFriendsAction = UIAlertAction(title: NSLocalizedString("Find Friends", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            self.navigationController!.pushViewController(AccountViewController(), animated: true)
+        })
+        let logOutAction = UIAlertAction(title: NSLocalizedString("Log Out", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            // Log out user and present the login view controller
+            //(UIApplication.sharedApplication().delegate as! AppDelegate).logOut()
+            print("Log Me Out Please")
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        actionController.addAction(myProfileAction)
+        actionController.addAction(findFriendsAction)
+        actionController.addAction(logOutAction)
+        actionController.addAction(cancelAction)
+        
+        self.presentViewController(actionController, animated: true, completion: nil)
+    }
+    
+    // MARK:- UIImagePickerDelegate
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    ///////////////////////
     
     //MARK: - actions
     
