@@ -33,7 +33,7 @@ class Main1ViewController: UIViewController {
         
         tabBarActionButton.backgroundColor = UIColor(red: 238.0/255.0, green: 130.0/255.0, blue: 34.0/255.0, alpha:1.0)
         
-        segmentedControl.selectedSegmentIndex = 0
+        //segmentedControl.selectedSegmentIndex = 0
     }
     
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
