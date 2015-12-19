@@ -29,6 +29,7 @@
 		A6BDFF1D1C2462F90058E1B9 /* TabBarActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BDFF1B1C2462F90058E1B9 /* TabBarActionButton.swift */; };
 		A6BDFF1E1C2462F90058E1B9 /* TabBarActionButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BDFF1C1C2462F90058E1B9 /* TabBarActionButtonItem.swift */; };
 		A6BDFF201C24712B0058E1B9 /* EditPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BDFF1F1C24712B0058E1B9 /* EditPhotoViewController.swift */; };
+		A6BDFF221C2492840058E1B9 /* AddPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BDFF211C2492840058E1B9 /* AddPrayerViewController.swift */; };
 		D5070B991B9DEDBE000CDE1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5070B981B9DEDBE000CDE1A /* AppDelegate.swift */; };
 		D5070BA01B9DEDBE000CDE1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5070B9F1B9DEDBE000CDE1A /* Images.xcassets */; };
 		D5070BA31B9DEDBE000CDE1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5070BA11B9DEDBE000CDE1A /* LaunchScreen.xib */; };
@@ -68,6 +69,7 @@
 		A6BDFF1B1C2462F90058E1B9 /* TabBarActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarActionButton.swift; sourceTree = "<group>"; };
 		A6BDFF1C1C2462F90058E1B9 /* TabBarActionButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarActionButtonItem.swift; sourceTree = "<group>"; };
 		A6BDFF1F1C24712B0058E1B9 /* EditPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPhotoViewController.swift; sourceTree = "<group>"; };
+		A6BDFF211C2492840058E1B9 /* AddPrayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPrayerViewController.swift; sourceTree = "<group>"; };
 		D5070B931B9DEDBE000CDE1A /* MHImageTabBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHImageTabBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5070B971B9DEDBE000CDE1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5070B981B9DEDBE000CDE1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				A66D25821C1F2B8F00C55681 /* AccountViewController.swift */,
 				A66D25891C1F2CB400C55681 /* ProfileHeader.swift */,
 				A66D25831C1F2B8F00C55681 /* SettingsViewController.swift */,
+				A6BDFF211C2492840058E1B9 /* AddPrayerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				A68970F61C21BE340021B6F3 /* Cache.swift in Sources */,
 				A68971061C2213B30021B6F3 /* PhotoDetailsFooterView.swift in Sources */,
 				A66D258A1C1F2CB400C55681 /* ProfileHeader.swift in Sources */,
+				A6BDFF221C2492840058E1B9 /* AddPrayerViewController.swift in Sources */,
 				A66D259E1C206ECF00C55681 /* Colors.swift in Sources */,
 				A6BDFF1D1C2462F90058E1B9 /* TabBarActionButton.swift in Sources */,
 				A68970FB1C21FFC00021B6F3 /* ProfileImageView.swift in Sources */,
@@ -501,6 +505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MHImageTabBar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -518,6 +523,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MHImageTabBar/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

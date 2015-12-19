@@ -1,19 +1,21 @@
 
 import UIKit
+import DynamicButton
+//import TabBarActionButton
 
 struct MainViewController {
     let storyboardName: String
     let imageName: String
 }
 
-class MHImageTabBarViewController: UIViewController, UIImagePickerControllerDelegate {
+class MHImageTabBarViewController: UIViewController {
     
     let viewControllers: [UIViewController]
     private let imageViews: [UIImageView]
     private var tabBarVisibleConstant = CGFloat(0)
     private var tabBarHiddenConstant: CGFloat!
     
-    //var tabBarActionButton: TabBarActionButton!
+    var tabBarActionButton: TabBarActionButton!
     
     @IBOutlet var tabBar: UIView!
     @IBOutlet var tabBarSeparator: UIView!
@@ -110,19 +112,21 @@ class MHImageTabBarViewController: UIViewController, UIImagePickerControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
         
+        setup()
         
         // Do any additional setup after loading the view.
         
         let prayerActionButton = UIButton(type: UIButtonType.Custom)
+        
         prayerActionButton.frame = CGRectMake(94.0, 0.0, 131.0, self.tabBar.bounds.size.height)
+        
         prayerActionButton.setImage(UIImage(named: "ButtonCamera.png"), forState: UIControlState.Normal)
         prayerActionButton.setImage(UIImage(named: "ButtonCameraSelected.png"), forState: UIControlState.Highlighted)
         prayerActionButton.addTarget(self, action: Selector("prayerButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
         self.tabBar.addSubview(prayerActionButton)
         
-        /*
+        
         let oneImage = UIImage(named: "one.png")!
         let twoImage = UIImage(named: "two.png")!
         
@@ -132,12 +136,15 @@ class MHImageTabBarViewController: UIViewController, UIImagePickerControllerDele
         let twoButton = TabBarActionButtonItem(title: "Action Item 2", image: twoImage)
         twoButton.action = { item in print("Action Item 2...") }
         
+        //tabBarActionButton.addTarget(self, action: Selector("prayerButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        
         tabBarActionButton = TabBarActionButton(attachedToView: self.view, items: [oneButton, twoButton])
         tabBarActionButton.action = { button in button.toggleMenu() }
         tabBarActionButton.setTitle("+", forState: .Normal)
 
         tabBarActionButton.backgroundColor = UIColor(red: 238.0/255.0, green: 130.0/255.0, blue: 34.0/255.0, alpha:1.0)
-        */
+        
+        
         selectedViewControllerIndex = 0
     }
     
@@ -150,11 +157,9 @@ class MHImageTabBarViewController: UIViewController, UIImagePickerControllerDele
     func prayerButtonAction(sender: AnyObject) {
         let actionController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        let myProfileAction = UIAlertAction(title: NSLocalizedString("My Profile", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
-            self.navigationController!.pushViewController(AccountViewController(), animated: true)
-        })
-        let findFriendsAction = UIAlertAction(title: NSLocalizedString("Find Friends", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
-            self.navigationController!.pushViewController(AccountViewController(), animated: true)
+
+        let addPrayerAction = UIAlertAction(title: NSLocalizedString("Add Prayer", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
+            self.navigationController!.pushViewController(AddPrayerViewController(), animated: true)
         })
         let logOutAction = UIAlertAction(title: NSLocalizedString("Log Out", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in
             // Log out user and present the login view controller
@@ -163,8 +168,9 @@ class MHImageTabBarViewController: UIViewController, UIImagePickerControllerDele
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
         
-        actionController.addAction(myProfileAction)
-        actionController.addAction(findFriendsAction)
+        //actionController.addAction(myProfileAction)
+        //actionController.addAction(findFriendsAction)
+        actionController.addAction(addPrayerAction)
         actionController.addAction(logOutAction)
         actionController.addAction(cancelAction)
         
@@ -261,3 +267,4 @@ extension UIView {
         addConstraint(NSLayoutConstraint(item: previousView, attribute: secondAttribute, relatedBy: .Equal, toItem: self, attribute: secondAttribute, multiplier: 1, constant: 0))
     }
 }
+

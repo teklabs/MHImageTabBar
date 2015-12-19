@@ -39,6 +39,8 @@ use_frameworks!
   pod 'AHKActionSheet', '~> 0.5'
   pod 'AMPopTip', '~> 0.7'
   pod 'ActionButton', git: 'https://github.com/teklabs/ActionButton.git', branch: 'master'
+  pod 'DynamicButton', '~> 1.2.0'
+  pod 'PathMenu', git: 'https://github.com/teklabs/PathMenu.git', branch: 'master'
 end
 
 

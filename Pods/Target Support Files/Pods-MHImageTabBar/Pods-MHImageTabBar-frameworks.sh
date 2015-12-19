@@ -88,6 +88,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MHImageTabBar/AMPopTip.framework"
   install_framework "Pods-MHImageTabBar/ActionButton.framework"
   install_framework "Pods-MHImageTabBar/Bolts.framework"
+  install_framework "Pods-MHImageTabBar/DynamicButton.framework"
   install_framework "Pods-MHImageTabBar/FBSDKCoreKit.framework"
   install_framework "Pods-MHImageTabBar/FBSDKLoginKit.framework"
   install_framework "Pods-MHImageTabBar/FormatterKit.framework"
@@ -97,6 +98,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MHImageTabBar/ParseFacebookUtilsV4.framework"
   install_framework "Pods-MHImageTabBar/ParseTwitterUtils.framework"
   install_framework "Pods-MHImageTabBar/ParseUI.framework"
+  install_framework "Pods-MHImageTabBar/PathMenu.framework"
   install_framework "Pods-MHImageTabBar/Synchronized.framework"
   install_framework "Pods-MHImageTabBar/UIImageAFAdditions.framework"
 fi
@@ -105,6 +107,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MHImageTabBar/AMPopTip.framework"
   install_framework "Pods-MHImageTabBar/ActionButton.framework"
   install_framework "Pods-MHImageTabBar/Bolts.framework"
+  install_framework "Pods-MHImageTabBar/DynamicButton.framework"
   install_framework "Pods-MHImageTabBar/FBSDKCoreKit.framework"
   install_framework "Pods-MHImageTabBar/FBSDKLoginKit.framework"
   install_framework "Pods-MHImageTabBar/FormatterKit.framework"
@@ -114,6 +117,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MHImageTabBar/ParseFacebookUtilsV4.framework"
   install_framework "Pods-MHImageTabBar/ParseTwitterUtils.framework"
   install_framework "Pods-MHImageTabBar/ParseUI.framework"
+  install_framework "Pods-MHImageTabBar/PathMenu.framework"
   install_framework "Pods-MHImageTabBar/Synchronized.framework"
   install_framework "Pods-MHImageTabBar/UIImageAFAdditions.framework"
 fi
